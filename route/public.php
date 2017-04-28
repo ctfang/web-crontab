@@ -9,5 +9,11 @@
 return [
     '404'=>'PublicController@error',
 
+    '/permission_denied'=>'PublicController@permission_denied',
+
     '/'=>'PublicController@index',
+
+    '/test'=>'PublicController@test',
+
+    '/login'=>'AuthController@login',
 ];

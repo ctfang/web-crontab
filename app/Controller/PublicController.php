@@ -11,13 +11,28 @@ namespace App\Controller;
 use App\App;
 use App\Directory;
 use App\Config;
-use App\Output;
+use App\Service\Output;
 
 class PublicController
 {
+    /**
+     * 没有设置路由
+     *
+     * @return string
+     */
     public function error()
     {
         return "这里是404页面";
+    }
+
+    /**
+     * 没有权限
+     *
+     * @return array
+     */
+    public function permission_denied()
+    {
+        return Output::error('permission denied','40002');
     }
 
     /**

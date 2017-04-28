@@ -1,0 +1,23 @@
+#!/usr/bin/php
+<?php
+require __DIR__.'/vendor/autoload.php';
+
+require_once __DIR__ . '/bootstrap/functions.php';
+
+$route = require __DIR__.'/config/cli_com.php';
+
+unset($argv[0]);
+$run_key = $argv[1];
+
+if( !isset($route[$run_key]) ){
+    die("not route\n");
+}
+$run_info = $route[$run_key];
+
+$arr = explode('@',$run_info);
+
+
+$controller = "\\App\\Controller\\{$arr[0]}";
+$function   = $arr[1];
+
+call_user_func_array([new $controller(),$function],$argv);

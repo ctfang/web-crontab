@@ -13,4 +13,6 @@ return [
     'middleware'=>[
         'Http'
     ],
+
+    'jwt_key'=>'well',
 ];

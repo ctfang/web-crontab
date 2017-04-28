@@ -22,10 +22,10 @@ class Config
         if( count($arr)>1 ){
             if( isset(self::$_config[$arr[0]]) ){
                 // 已经设置的
-                $data   = self::$_config[$arr[0]];
+                $data   = self::$_config[$arr[0]];unset($arr[0]);
             }elseif ( file_exists( $filePath = basePath("config/{$arr[0]}.php") ) ){
                 // 找到文件
-                $data   = self::$_config[$arr[0]] = include $filePath;
+                $data   = self::$_config[$arr[0]] = include $filePath;unset($arr[0]);
             }else{
                 goto default_config;
             }
@@ -34,7 +34,7 @@ class Config
             // 默认配置文件
             if( !isset(self::$_config['config']) ){
                 $filePath = basePath("config/config.php");
-                $data   = self::$_config[$arr[0]] = include $filePath;
+                $data   = self::$_config['config'] = include $filePath;
             }else{
                 $data   = self::$_config['config'];
             }

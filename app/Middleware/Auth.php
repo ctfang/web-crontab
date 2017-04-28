@@ -9,12 +9,16 @@
 namespace App\Middleware;
 
 
-use App\Redis;
+use App\Service\Authorization;
 
 class Auth
 {
     public function handle($response)
     {
+        if( Authorization::register()->verify() ){
+            return $response;
+        }
+        $response->redirect('/permission_denied');
         return $response;
     }
 }

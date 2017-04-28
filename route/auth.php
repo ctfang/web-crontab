@@ -7,5 +7,7 @@
  * Time: 下午3:23
  */
 return [
+    '/home'=>'HomeController@index',
 
+    '/cron_list'=>'',
 ];

@@ -53,4 +53,14 @@ class Response
             }
         }
     }
+
+    /**
+     * 重定向
+     *
+     * @param $uri
+     */
+    public function redirect($uri)
+    {
+        Request::capture()->setRoute($uri);
+    }
 }

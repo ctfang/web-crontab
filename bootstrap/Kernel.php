@@ -25,6 +25,8 @@ class Kernel
         $route      = Route::get($request->getRoute());
         // 执行中间件
         $response   = $this->runMiddleware($route,$response);
+        // 中间可能修改
+        $route      = Route::get($request->getRoute());
         $arr        = explode('@',$route['action']);
         $controler  = "\\App\\Controller\\{$arr[0]}";
         if( class_exists($controler) && method_exists($controler  = new $controler(),$function   = $arr[1]) ){
@@ -38,6 +40,10 @@ class Kernel
 
     /**
      * 执行中间件
+     *
+     * @param $route
+     * @param $response
+     * @return \Exception
      */
     public function runMiddleware($route,$response)
     {

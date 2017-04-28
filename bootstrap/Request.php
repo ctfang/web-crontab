@@ -19,6 +19,8 @@ class Request
 
     private $uri    = '';// 地址
     private $route  = '';
+    private $post   = '';
+    private $get    = '';
 
     /**
      * 创建单例
@@ -31,6 +33,9 @@ class Request
             $thisRequest = new Request();
             $thisRequest->setUri();
             $thisRequest->setRoute();
+            // 表单参数设置
+            $thisRequest->get = $_GET;unset($_GET);
+            $thisRequest->post= $_POST;unset($_POST );
             self::$init = $thisRequest;
         }
 
@@ -62,10 +67,12 @@ class Request
 
     /**
      * 设置请求旅游
+     *
+     * @param $route
      */
-    protected function setRoute()
+    public function setRoute($route=null)
     {
-        $this->route = explode('?',$_SERVER['REQUEST_URI'])[0];
+        $this->route = $route?$route:explode('?',$_SERVER['REQUEST_URI'])[0];
     }
 
     public function getRoute()
@@ -81,5 +88,67 @@ class Request
     public function getUri()
     {
         return $this->uri;
+    }
+
+    /**
+     * @var get 的key缓存
+     */
+    private static $_get_value;
+    /**
+     * 获取get表单参数
+     *
+     * @param $key
+     * @param null $default
+     * @return mixed
+     */
+    public function get($key, $default=null)
+    {
+        if( isset(self::$_get_value[$key]) ){
+            return self::$_get_value[$key];
+        }
+
+        $arrKey = explode('.',$key);
+        $data   = $this->get;
+        foreach ($arrKey as $temKey){
+            if( isset($data[$temKey]) ){
+                $data   = $data[$temKey];
+            }else{
+                self::$_get_value[$key] = $default;
+                return $default;
+            }
+        }
+        self::$_get_value[$key] = $data;
+        return $data;
+    }
+
+    /**
+     * @var post 的key缓存
+     */
+    private static $_post_value;
+    /**
+     * 获取get表单参数
+     *
+     * @param $key
+     * @param null $default
+     * @return mixed
+     */
+    public function post($key, $default=null)
+    {
+        if( isset(self::$_post_value[$key]) ){
+            return self::$_post_value[$key];
+        }
+
+        $arrKey = explode('.',$key);
+        $data   = $this->post;
+        foreach ($arrKey as $temKey){
+            if( isset($data[$temKey]) ){
+                $data   = $data[$temKey];
+            }else{
+                self::$_post_value[$key] = $default;
+                return $default;
+            }
+        }
+        self::$_post_value[$key] = $data;
+        return $data;
     }
 }

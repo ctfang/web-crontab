@@ -5,7 +5,8 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.5"
+        "php": ">=5.5",
+        "lcobucci/jwt": "^3.2"
     },
     "autoload": {
         "psr-4": {
