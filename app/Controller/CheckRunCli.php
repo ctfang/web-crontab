@@ -25,6 +25,7 @@ class CheckRunCli
         CronLog::write();
         // 记录最后运行时间
         Cache::set($this->_last_run_time_key,time());
+        // 检查更改
     }
 
     public function getLastTime()
