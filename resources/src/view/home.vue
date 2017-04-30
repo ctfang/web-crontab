@@ -18,7 +18,7 @@
 			<el-col :span="22" :offset="1">
 				<el-collapse v-model="activeNames" @change="handleChange">
 
-					<el-collapse-item title="一致性 Consistency" name="1">
+					<el-collapse-item title="test项目定时任务" name="1">
 
 						<el-table :data="tableData" border style="width: 100%">
 							<el-table-column label="日期" width="180">
