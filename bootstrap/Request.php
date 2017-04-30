@@ -35,7 +35,7 @@ class Request
             $thisRequest->setRoute();
             // 表单参数设置
             $thisRequest->get = $_GET;unset($_GET);
-            $thisRequest->post= $_POST;unset($_POST );
+            $thisRequest->post= $_POST;unset($_POST);
             self::$init = $thisRequest;
         }
 

@@ -7,5 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'system\\' => array($baseDir . '/bootstrap'),
+    'Lcobucci\\JWT\\' => array($vendorDir . '/lcobucci/jwt/src'),
     'App\\' => array($baseDir . '/app'),
 );

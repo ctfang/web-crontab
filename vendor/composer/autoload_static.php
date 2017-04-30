@@ -11,6 +11,10 @@ class ComposerStaticInitb2be75670f4b4ca4108e9ea3ceb67caf
         array (
             'system\\' => 7,
         ),
+        'L' => 
+        array (
+            'Lcobucci\\JWT\\' => 13,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -21,6 +25,10 @@ class ComposerStaticInitb2be75670f4b4ca4108e9ea3ceb67caf
         'system\\' => 
         array (
             0 => __DIR__ . '/../..' . '/bootstrap',
+        ),
+        'Lcobucci\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/lcobucci/jwt/src',
         ),
         'App\\' => 
         array (

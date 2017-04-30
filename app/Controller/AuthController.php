@@ -19,11 +19,12 @@ class AuthController
     {
         $username = request()->post('username');
         $password = request()->post('password');
-        $password = password_hash($password,PASSWORD_DEFAULT);
 
-        if( $username!==Config::get('user_info.username') || password_verify($password,Config::get('user_info.password')) ){
+        if( $username!==Config::get('user_info.username') ){
             // 账号密码错误
-            return Output::error('账号密码错误','40001');
+            return Output::error('账号错误','40001');
+        }elseif( !password_verify($password,Config::get('user_info.password')) ){
+            return Output::error('密码错误','40001');
         }
         $login = [
             'username'=>$username,
