@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Service\CronLog;
 use system\Cache;
 
 class CheckRunCli
@@ -21,7 +22,14 @@ class CheckRunCli
      */
     public function index($cmd)
     {
+        CronLog::write();
         // 记录最后运行时间
         Cache::set($this->_last_run_time_key,time());
     }
+
+    public function getLastTime()
+    {
+        return Cache::get($this->_last_run_time_key);
+    }
+
 }
