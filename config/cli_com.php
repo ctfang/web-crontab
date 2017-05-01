@@ -9,7 +9,7 @@
 return [
     'check'=>'CheckRunCli@index',
 
-    'make'=>'CronServiceCli@make',
+    'make'=>'CheckRunCli@make',
 
     'server'=>'CheckRunCli@error',
 ];

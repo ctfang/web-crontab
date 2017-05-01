@@ -13,6 +13,11 @@ use App\Service\Authorization;
 use App\Service\Output;
 use system\Config;
 
+/**
+ * 权限控制器
+ *
+ * @package App\Controller
+ */
 class AuthController
 {
     public function login()

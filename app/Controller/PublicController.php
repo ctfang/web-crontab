@@ -11,6 +11,8 @@ namespace App\Controller;
 use App\App;
 use App\Directory;
 use App\Config;
+use App\Models\CrontabModel;
+use App\Service\Crontab;
 use App\Service\Output;
 
 class PublicController
@@ -42,4 +44,22 @@ class PublicController
     {
         return file_get_contents(basePath('public/index.html'));
     }
+
+    /**
+     * 测试
+     */
+    public function test()
+    {
+        //(new CheckRunCli())->make();
+        $model = new CrontabModel();
+
+        $cron  = new Crontab();
+        $list  = $model->getUseList();
+
+        foreach ($list as $runUser=>$item) {
+            $cron::create($item,$runUser);
+        }
+        p();
+    }
+
 }
