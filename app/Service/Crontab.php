@@ -39,8 +39,11 @@ class Crontab
     {
         // 整合数据
         $list = (new CrontabModel())->getUseList();
-        print_r($list);die("line:".__LINE__);
-
+        foreach ($list as $user=>$cmd){
+            $str = implode("\n",$cmd)."\n ";
+            file_put_contents(basePath('storage/crontabs/'.$user),$str);
+        }
+        die("OK");
         // 写入配置文件
 
 

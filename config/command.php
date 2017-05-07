@@ -16,5 +16,6 @@ return [
     // 重启命令
     'crontab_restart'=>'sudo service cron restart',
 
-    //
+    // cron命令目录
+    'cron_path'=>'/usr/bin/crontab',
 ];

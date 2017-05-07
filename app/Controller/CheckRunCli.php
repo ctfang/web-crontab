@@ -109,4 +109,15 @@ class CheckRunCli
     {
         Cache::set($this->_last_run_time_key,time());
     }
+
+
+    public function test($cmd,$user)
+    {
+        $string = exec("su {$user};");
+        if( $string!='' ){
+            // 失败-放回错误信息
+        }
+        system(Config::get('command.cron_path').' '.basePath('storage/crontabs/'.$user).' ;');
+        exec("exit;");
+    }
 }

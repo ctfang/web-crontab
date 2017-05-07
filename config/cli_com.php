@@ -12,4 +12,6 @@ return [
     'make'=>'CheckRunCli@make',
 
     'server'=>'CheckRunCli@error',
+
+    'test'=>'CheckRunCli@test',
 ];

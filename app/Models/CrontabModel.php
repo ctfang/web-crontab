@@ -122,7 +122,7 @@ class CrontabModel
     {
         $userList   = [];
         $list       = (new PlanModel())->lists();
-        print_r("OKKOKOK");
+
         foreach ($list as $item){
             if( $item['status'] ){
                 foreach ($item['cmd-list'] as $arrCmd){
