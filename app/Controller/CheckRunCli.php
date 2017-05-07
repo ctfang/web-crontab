@@ -29,12 +29,6 @@ class CheckRunCli
      */
     public $_last_run_time_key = '_last_run_time_key';
 
-    /**
-     * 记录是否重启信号
-     *
-     * @var string
-     */
-    private $_is_restart_key = '_is_restart_key';
 
     private $_cmd_start_notes = "\n# web-cron start \n";
 
@@ -60,7 +54,6 @@ class CheckRunCli
         $cron->createPlan($planName,'工具依赖的命令',true);
         $cron->createCmd('root',$planName,$cmdConfig['cmd'],'默认创建');
 
-        die("OKOOKO");
         // 开始写入root
         $write = $this->_cmd_start_notes.$cmdConfig['cmd'].$this->_cmd_end_notes;
         if( file_exists($cmdConfig['file']) ){
@@ -93,8 +86,7 @@ class CheckRunCli
         // 记录最后运行时间
         $this->setLastTime();
         // 检查更改
-
-        if($this->getIsRestart()){
+        if( Crontab::getIsRestart() ){
             Crontab::restart();
         }
 
@@ -116,47 +108,5 @@ class CheckRunCli
     private function setLastTime()
     {
         Cache::set($this->_last_run_time_key,time());
-    }
-
-    /**
-     * 设置重启信号
-     *
-     * @param bool $status
-     */
-    public function setIsRestart($status=false)
-    {
-        if($status){
-            // 记录已经重启
-            Cache::set($this->_is_restart_key,[
-                'status'=>true,// 已经重启
-                'restart_time'=>time(),// 执行重启时间
-            ]);
-        }else{
-            // 新增重启
-            Cache::set($this->_is_restart_key,[
-                'created'=>time(),// 信号时间
-                'status'=>false,// 重启状体
-                'restart_time'=>0,// 执行重启时间
-            ]);
-        }
-
-    }
-
-    /**
-     * 获取是否重启信号
-     *
-     * @return null
-     */
-    public function getIsRestart()
-    {
-        $data = Cache::get($this->_is_restart_key);
-
-        if( empty($data) ){
-            return false;
-        }elseif ($data['status'] ){
-            return false;
-        }
-
-        return true;
     }
 }

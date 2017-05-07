@@ -27,29 +27,6 @@ class CrontabModel
     }
 
     /**
-     * 获取可使用的命令
-     */
-    public function getUseList()
-    {
-        $userList = [];
-        $plan = $this->getPlanList();
-
-        foreach ($plan as &$item){
-            if( $item['status'] ){
-                $temp = $this->getCmdList($item['name']);
-                foreach ($temp as $value){
-                    if( $value['status'] ){
-                        $userList[$value['runUser']][] = $value['cmd'];
-                    }
-                }
-
-            }
-        }
-
-        return $userList;
-    }
-
-    /**
      * 创建命令，加入方案命令列表
      *
      * @param $runUser 运行用户
@@ -138,4 +115,39 @@ class CrontabModel
         return $list[$id];
     }
 
+    /**
+     * 获取可用的配置
+     */
+    public function getUseList()
+    {
+        $userList   = [];
+        $list       = (new PlanModel())->lists();
+        print_r("OKKOKOK");
+        foreach ($list as $item){
+            if( $item['status'] ){
+                foreach ($item['cmd-list'] as $arrCmd){
+                    if( $arrCmd['status'] ){
+
+                        $userList[$arrCmd['runUser']][] = $this->cmdDecode($arrCmd['cmd']);
+                    }
+                }
+
+            }
+        }
+
+        return $userList;
+    }
+
+    /**
+     * 生产系统可用的crontab命令
+     *
+     * @param $arrCmd
+     * @return string
+     */
+    public function cmdDecode($arrCmd)
+    {
+        $cmd = $arrCmd['minute'].' '.$arrCmd['hour'].' '.$arrCmd['day'].' '.$arrCmd['month'].' '.$arrCmd['week'].' '.$arrCmd['cmd'];
+
+        return $cmd;
+    }
 }

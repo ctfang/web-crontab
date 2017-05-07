@@ -9,10 +9,46 @@
 namespace App\Controller;
 
 
+use App\Service\Crontab;
+use App\Service\Output;
+
 class HomeController
 {
-    public function index()
+    /**
+     * 获取多少秒后重启
+     */
+    public function getRestartTime()
     {
-        return "登陆首页教程页面";
+        $lastTime = (new CheckRunCli())->getLastTime();
+
+        $time = is_numeric($lastTime)?(time()-$lastTime):60;
+        return Output::success('获取多少秒后重启',10001,$time);
+    }
+
+    /**
+     * 使设置生效-启用
+     * @return string
+     */
+    public function enable()
+    {
+        if( request()->get('enable',0)==0 ){
+            Crontab::setIsRestart(false);
+        }else{
+            Crontab::setIsRestart(true);
+        }
+        return Output::success('使设置生效');
+    }
+
+    /**
+     * 是否重启完成
+     */
+    public function is_restart()
+    {
+        if (Crontab::getIsRestart() ){
+            // 启动已经生效
+            return Output::success('',10001,false);
+        }
+        // 还没有完成重启
+        return Output::success('',10001,true);
     }
 }

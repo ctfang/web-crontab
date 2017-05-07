@@ -9,6 +9,9 @@
 namespace App\Service;
 
 
+use App\Models\CrontabModel;
+use App\Models\PlanModel;
+use system\Cache;
 use system\Config;
 
 /**
@@ -18,6 +21,13 @@ use system\Config;
  */
 class Crontab
 {
+    /**
+     * 记录是否重启信号
+     *
+     * @var string
+     */
+    private static $_is_restart_key = '_is_restart_key';
+
     private $_cmd_start_notes = "\n# web-cron start \n";
 
     private $_cmd_end_notes = "\n# web-cron end \n";
@@ -27,7 +37,19 @@ class Crontab
      */
     public static function restart()
     {
+        // 整合数据
+        $list = (new CrontabModel())->getUseList();
+        print_r($list);die("line:".__LINE__);
+
+        // 写入配置文件
+
+
+        // 重启服务器
         system(Config::get('command.crontab_restart'));
+
+
+        // 设置已经重启
+        self::setIsRestart(false);
     }
 
     /**
@@ -46,5 +68,56 @@ class Crontab
     public function getLocalhostCrontabPath($runUser)
     {
         return basePath('storage/crontabs/'.$runUser);
+    }
+
+
+    /**
+     * 设置重启信号
+     *
+     * @param bool $status
+     */
+    public static function setIsRestart($status=false)
+    {
+        if($status){
+            // 记录已经重启
+            Cache::set(self::$_is_restart_key,[
+                'status'=>true,// 已经重启
+                'restart_time'=>time(),// 执行重启时间
+            ]);
+        }else{
+            // 新增重启
+            Cache::set(self::$_is_restart_key,[
+                'created'=>time(),// 信号时间
+                'status'=>false,// 重启状体
+                'restart_time'=>0,// 执行重启时间
+            ]);
+        }
+
+    }
+
+    /**
+     * 获取是否重启信号
+     *
+     * @return null
+     */
+    public static function getIsRestart()
+    {
+        $data = Cache::get(self::$_is_restart_key);
+
+        if( empty($data) ){
+            return false;
+        }elseif ($data['status'] ){
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * 最近的重启信息
+     */
+    public static function getRestartInfo()
+    {
+        return Cache::get(self::$_is_restart_key,[]);
     }
 }

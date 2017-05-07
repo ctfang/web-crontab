@@ -33,4 +33,13 @@ return [
 
     // 命令详情
     '/cron/show'=>'CrontabController@show',
+
+    // 设置启动信息
+    '/server/enable'=>'HomeController@enable',
+
+    // 查看启动是否生效
+    '/server/restart'=>'HomeController@is_restart',
+
+    // 获取生效时间
+    '/server/time'=>'HomeController@getRestartTime',
 ];
