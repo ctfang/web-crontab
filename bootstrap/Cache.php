@@ -29,7 +29,7 @@ class Cache
     {
         $path     = Config::get('storage').'/data/'.$key;
         if(!file_exists($path)){
-            return null;
+            return [];
         }
         $data     = unserialize( @file_get_contents($path) );
 

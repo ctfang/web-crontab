@@ -7,7 +7,12 @@
  * Time: 下午3:23
  */
 return [
-    '/home'=>'HomeController@index',
+    // 新增方案
+    '/plan/store'=>'PlanController@store',
 
-    '/cron_list'=>'',
+    // 方案列表
+    '/plan/list'=>'PlanController@index',
+
+    // 方案详情
+    '/plan'=>'PlanController@show',
 ];

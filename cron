@@ -7,10 +7,21 @@ require_once __DIR__ . '/bootstrap/functions.php';
 $route = require __DIR__.'/config/cli_com.php';
 
 unset($argv[0]);
+
+if( !isset($argv[1]) ){
+    foreach ($route as $route=>$no){
+        echo "{$route} \n";
+    }
+    die("\n");
+}
 $run_key = $argv[1];
 
 if( !isset($route[$run_key]) ){
-    die("not route\n");
+    echo "not route ---- list\n";
+    foreach ($route as $route=>$no){
+        echo "{$route} \n";
+    }
+    die("\n");
 }
 $run_info = $route[$run_key];
 

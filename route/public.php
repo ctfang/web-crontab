@@ -7,6 +7,7 @@
  * Time: 下午3:23
  */
 return [
+    // 404页面
     '404'=>'PublicController@error',
 
     '/permission_denied'=>'PublicController@permission_denied',

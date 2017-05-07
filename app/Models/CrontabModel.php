@@ -25,7 +25,7 @@ class CrontabModel
     public function createPlan($name,$remake,$status=false)
     {
         $data = [
-            'created'=>time(),
+            'created'=>date('Y-m-d H:i:s'),
             'name'=>$name,
             'remake'=>$remake,
             'status'=>$status,
@@ -34,6 +34,40 @@ class CrontabModel
         $list = Cache::get($this->_plan_list_key,[]);
         $list[$name] = $data;
         Cache::set($this->_plan_list_key,$list);
+    }
+
+    /**
+     * 是否已经有相同的方案
+     *
+     * @param $name
+     * @return bool
+     */
+    public function hasPlan($name)
+    {
+        $list = Cache::get($this->_plan_list_key,[]);
+
+        foreach ($list as $value){
+            if( $value['name']==$name ){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 获取
+     *
+     * @param $name
+     * @return array
+     */
+    public function getPlan($name)
+    {
+        $list = Cache::get($this->_plan_list_key,[]);
+
+        if( isset($list[$name]) ){
+            return $list[$name];
+        }
+        return [];
     }
 
     /**
@@ -93,7 +127,7 @@ class CrontabModel
     {
         $data = [
             'id'=>$this->getCmdId($planName),
-            'created'=>time(),
+            'created'=>date('Y-m-d H:i:s'),
             'runUser'=>$runUser,
             'cmd'=>$cmd,
             'remake'=>$remake,
