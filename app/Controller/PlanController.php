@@ -9,7 +9,7 @@
 namespace App\Controller;
 
 
-use App\Models\CrontabModel;
+use App\Models\PlanModel;
 use App\Service\Output;
 
 class PlanController
@@ -19,7 +19,7 @@ class PlanController
      */
     public function index()
     {
-        $list = (new CrontabModel())->getPlanList();
+        $list = (new PlanModel())->lists();
         return empty($list)?Output::success('方案列表','10000',[]):Output::success('方案列表','10001',$list);
     }
 
@@ -29,7 +29,7 @@ class PlanController
     public function show()
     {
         $name   = request()->get('name');
-        $plan = (new CrontabModel())->getPlan($name);
+        $plan = (new PlanModel())->show($name);
         if( empty($plan) ){
             return Output::success('显示方案信息','10000',[]);
         }
@@ -48,11 +48,11 @@ class PlanController
         if( empty($name) || empty($remake) ){
             return Output::error('参数缺失',40004);
         }
-        $cron = new CrontabModel();
-        if( $cron->hasPlan($name) ){
+        $PlanModel = new PlanModel();
+        if( $PlanModel->isHas($name) ){
             return Output::error('方案已存在',40003);
         }
-        $cron->createPlan($name,$remake,true);
+        $PlanModel->create($name,$remake,true);
         return Output::success();
     }
 
@@ -61,7 +61,21 @@ class PlanController
      */
     public function edit()
     {
-
+        $name   = request()->post('name');
+        $remake = request()->post('remake');
+        $status = request()->post('status');
+        if($status!==null){
+            $status = $status==1?true:false;
+        }
+        if( empty($name) ){
+            return Output::error('参数缺失',40004);
+        }
+        $PlanModel = new PlanModel();
+        if( !$PlanModel->isHas($name) ){
+            return Output::error('方案不存在',40004);
+        }
+        $PlanModel->edit($name,$remake,$status);
+        return Output::success();
     }
 
     /**
@@ -69,7 +83,16 @@ class PlanController
      */
     public function destroy()
     {
-
+        $name   = request()->get('name');
+        if( empty($name) ){
+            return Output::error('参数缺失',40004);
+        }
+        $PlanModel = new PlanModel();
+        if( !$PlanModel->isHas($name) ){
+            return Output::error('方案不存在',40004);
+        }
+        $PlanModel->destroy($name);
+        return Output::success();
     }
 
 }

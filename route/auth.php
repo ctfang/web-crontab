@@ -15,4 +15,19 @@ return [
 
     // 方案详情
     '/plan'=>'PlanController@show',
+
+    // 新增命令
+    '/cron/store'=>'CrontabController@store',
+
+    // 删除命令
+    '/cron/destroy'=>'CrontabController@destroy',
+
+    // 删除方案
+    '/plan/destroy'=>'PlanController@destroy',
+
+    // 编辑命令
+    '/cron/edit'=>'CrontabController@edit',
+
+    // 编辑方案
+    '/plan/edit'=>'PlanController@edit',
 ];

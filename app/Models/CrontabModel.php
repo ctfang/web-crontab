@@ -13,72 +13,7 @@ use system\Cache;
 
 class CrontabModel
 {
-    private $_plan_list_key = '_plan_list_key';
 
-    /**
-     * 新增方案
-     *
-     * @param $name
-     * @param $remake 备注
-     * @param bool $status
-     */
-    public function createPlan($name,$remake,$status=false)
-    {
-        $data = [
-            'created'=>date('Y-m-d H:i:s'),
-            'name'=>$name,
-            'remake'=>$remake,
-            'status'=>$status,
-        ];
-
-        $list = Cache::get($this->_plan_list_key,[]);
-        $list[$name] = $data;
-        Cache::set($this->_plan_list_key,$list);
-    }
-
-    /**
-     * 是否已经有相同的方案
-     *
-     * @param $name
-     * @return bool
-     */
-    public function hasPlan($name)
-    {
-        $list = Cache::get($this->_plan_list_key,[]);
-
-        foreach ($list as $value){
-            if( $value['name']==$name ){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 获取
-     *
-     * @param $name
-     * @return array
-     */
-    public function getPlan($name)
-    {
-        $list = Cache::get($this->_plan_list_key,[]);
-
-        if( isset($list[$name]) ){
-            return $list[$name];
-        }
-        return [];
-    }
-
-    /**
-     * 获取方案列表
-     *
-     * @return null
-     */
-    public function getPlanList()
-    {
-        return $list = Cache::get($this->_plan_list_key,[]);
-    }
 
     /**
      * 获取命令列表
@@ -86,7 +21,7 @@ class CrontabModel
      * @param $planName
      * @return null
      */
-    public function getCmdList($planName)
+    public function lists($planName)
     {
         return $list = Cache::get($this->getPlanListKey($planName));
     }
@@ -123,7 +58,7 @@ class CrontabModel
      * @param $remake 备注
      * @return mixed 命令id
      */
-    public function createCmd($runUser,$planName,$cmd,$remake)
+    public function create($runUser,$planName,$cmd,$remake)
     {
         $data = [
             'id'=>$this->getCmdId($planName),
@@ -133,7 +68,6 @@ class CrontabModel
             'remake'=>$remake,
             'status'=>true,
         ];
-
 
         $list = Cache::get($this->getPlanListKey($planName));
         $list[$data['id']] = $data;
@@ -163,6 +97,45 @@ class CrontabModel
      */
     public function getPlanListKey($planName)
     {
-        return '_list_key_for_'.$planName;
+        return 'list_key_for_'.$planName;
     }
+
+    /**
+     * 编辑
+     */
+    public function edit($id,$runUser,$planName,$cmd,$remake,$status)
+    {
+        $data = $this->show($planName,$id);
+
+        $runUser!==null and $data['runUser'] = $runUser;
+        $cmd!==null     and $data['cmd'] = $cmd;
+        $remake!==null  and $data['remake'] = $remake;
+        $status!==null  and $data['status'] = $status;
+
+        $list = Cache::get($this->getPlanListKey($planName));
+        $list[$data['id']] = $data;
+        Cache::set($this->getPlanListKey($planName),$list);
+        return $data['id'];
+    }
+
+    /**
+     * 删除
+     */
+    public function destroy($planName,$id)
+    {
+        $list = Cache::get($this->getPlanListKey($planName));
+        unset($list[$id]);
+        Cache::set($this->getPlanListKey($planName),$list);
+        return true;
+    }
+
+    /**
+     * 查询
+     */
+    public function show($planName,$id)
+    {
+        $list = Cache::get($this->getPlanListKey($planName));
+        return $list[$id];
+    }
+
 }
