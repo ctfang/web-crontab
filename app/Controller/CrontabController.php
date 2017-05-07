@@ -16,6 +16,25 @@ use App\Service\Output;
 class CrontabController
 {
     /**
+     * 命令信息
+     */
+    public function show()
+    {
+        $planName   = request()->get('plan_name');
+        $cmd_id     = request()->get('id');
+        if( empty($planName) || empty($cmd_id) ){
+            return Output::error('参数缺失',40004);
+        }
+        $cronModel  = new CrontabModel();
+        $planModel  = new PlanModel();
+        if( !$planModel->isHas($planName) ){
+            return Output::error('方案不存在',40005);
+        }
+        $data = $cronModel->show($planName,$cmd_id);
+        return Output::success('命令信息','10001',$data);
+    }
+
+    /**
      * 创建命令
      */
     public function store()

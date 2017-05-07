@@ -30,4 +30,7 @@ return [
 
     // 编辑方案
     '/plan/edit'=>'PlanController@edit',
+
+    // 命令详情
+    '/cron/show'=>'CrontabController@show',
 ];
