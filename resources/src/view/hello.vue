@@ -4,19 +4,20 @@
     <h1>{{ msg }}</h1>
     <h2>web-crontab</h2>
     <ul>
-      <li><a href="#home" >前去管理</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">新增任务</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">修改密码</a></li>
-      <li><a href="#logout" target="_blank">退出登录</a></li>
+      <li><router-link to="/home" >前去管理</router-link></li>
+      <li><router-link to="/index/task" >新增任务</router-link></li>
+	  <li><router-link to="/index/add_command" >新增命令</router-link></li>
+      <li><router-link href="https://gitter.im/vuejs/vue" target="_blank">修改密码</router-link></li>
+      <li><router-link href="#logout" target="_blank">退出登录</router-link></li>
       <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">查看使用教程</a></li>
+      <li><router-link href="http://vuejs-templates.github.io/webpack/" target="_blank">查看使用教程</router-link></li>
     </ul>
     <h2>联系</h2>
     <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">GitHub</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">Email</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">Docs</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">Blog</a></li>
+      <li><router-link href="http://router.vuejs.org/" target="_blank">GitHub</router-link></li>
+      <li><router-link href="http://vuex.vuejs.org/" target="_blank">Email</router-link></li>
+      <li><router-link href="http://vue-loader.vuejs.org/" target="_blank">Docs</router-link></li>
+      <li><router-link href="https://github.com/vuejs/awesome-vue" target="_blank">Blog</router-link></li>
     </ul>
   </div>
 </template>

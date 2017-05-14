@@ -13,24 +13,24 @@ Vue.use(Element)
 Vue.config.productionTip = false
 
 
-router.beforeEach(function(to,from,next){
-	if( to.path=='/login' || to.path=='/' ){
-		next();
-	}else if(to.path=='/logout'){
-		VueCookie.set('Authorization');
-		console.log("退出登陆");
-		next("/");
-	}else{
+// router.beforeEach(function(to,from,next){
+	// if( to.path=='/login' || to.path=='/' ){
+		// next();
+	// }else if(to.path=='/logout'){
+		// VueCookie.set('Authorization');
+		// console.log("退出登陆");
+		// next("/");
+	// }else{
 		// 验证的路由
-		if( islogin()==false ){
-			console.log("没有登陆重定向");
-    		next("/login");
-		}else{
-	    	next();
-		}
-	}
+		// if( islogin()==false ){
+			// console.log("没有登陆重定向");
+    		// next("/login");
+		// }else{
+	    	// next();
+		// }
+	// }
 
-})
+// })
 
 /* eslint-disable no-new */
 new Vue({
