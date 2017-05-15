@@ -18,4 +18,12 @@ npm run build
 npm run build --report
 ```
 
+生产时，必须复制dist到public下，publi目录是唯一外网访问的目录
+
+``` bash
+npm run build
+
+cp -R -f ./dist/* ../public/
+``` 
+
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
