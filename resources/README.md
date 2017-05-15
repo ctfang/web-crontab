@@ -18,7 +18,7 @@ npm run build
 npm run build --report
 ```
 
-生产时，必须复制到public下，publi目录是唯一外网访问的目录
+生产时，必须复制dist到public下，publi目录是唯一外网访问的目录
 
 ``` bash
 npm run build
