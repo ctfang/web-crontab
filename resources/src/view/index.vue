@@ -12,7 +12,7 @@
 		</el-menu>
 		<el-row class="tac conatiner-main">
 			 <el-col :span="3" style="height:100%">
-				<el-menu default-active="2" style='height:100%' class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" theme="dark">
+				<el-menu d style='height:100%' class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" theme="dark">
 				  <el-submenu index="1">
 					<template slot="title">命令操作</template>
 						<router-link to="/index/command_list">
@@ -66,6 +66,12 @@
     },
     methods: {
       handleSelect(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
         console.log(key, keyPath);
       }
     }

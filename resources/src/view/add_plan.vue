@@ -3,29 +3,8 @@
 	  <el-form-item label="方案名称">
 		<el-input v-model="form.name"></el-input>
 	  </el-form-item>
-	  <el-form-item label="运行用户">
-		<el-input v-model="form.name"></el-input>
-	  </el-form-item>
-	  <el-form-item label="月">
-		<el-input v-model="form.name"></el-input>
-	  </el-form-item>
-	  <el-form-item label="周">
-		<el-input v-model="form.name"></el-input>
-	  </el-form-item>
-	  <el-form-item label="日">
-		<el-input v-model="form.name"></el-input>
-	  </el-form-item>
-	  <el-form-item label="小时">
-		<el-input v-model="form.name"></el-input>
-	  </el-form-item>
-	  <el-form-item label="分钟">
-		<el-input v-model="form.name"></el-input>
-	  </el-form-item>
-	  <el-form-item label="具体命令">
-		<el-input v-model="form.name"></el-input>
-	  </el-form-item>
 	  <el-form-item label="备注">
-		<el-input v-model="form.name"></el-input>
+		<el-input v-model="form.remask"></el-input>
 	  </el-form-item>
 	  <el-form-item>
 		<el-button type="primary" @click="onSubmit">立即创建</el-button>
@@ -40,19 +19,17 @@
       return {
         form: {
           name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
+          remask: '',
         }
       }
     },
     methods: {
-      onSubmit() {
-        console.log('submit!');
+      onSubmit(){
+	  console.log(this.form)
+        http.post('/plan/store',this.form)
+		.then((result)=>{
+			router.push('/index/plan_list');
+		})
       }
     }
   }

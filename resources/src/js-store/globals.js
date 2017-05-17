@@ -6,14 +6,16 @@ global.VueCookie = VueCookie;
 //------------- axios -----------
 //
 import axios from 'axios'
-global.http = axios.create({
-  baseURL: 'http://www.web-cron.app/',
+global.http =  	axios.create({
+  baseURL: 'http://localhost:1080/web-crontab/cron.php/',
   timeout: 1000,
   // 跨域不能设置头
-  // headers: {
-  // 	//'Content-Type' : 'application/x-www-form-urlencoded',
-  // 	//'Authorization':'123'
-  // }
+  headers: {
+	'Content-Type' : 'application/x-www-form-urlencoded',
+  },
+  params:{
+	 Authorization:VueCookie.get('Authorization')
+  }
 });
 
 
