@@ -9,6 +9,7 @@ import add_command from '@/view/add_command'
 import command_list from '@/view/command_list'
 import add_plan from '@/view/add_plan'
 import plan_list from '@/view/plan_list'
+import edit_plan from '@/view/edit_plan'
 
 Vue.use(Router)
 
@@ -48,7 +49,13 @@ export default new Router({
 				path:'plan_list',
 				name:'plan_list',
 				component: plan_list,
-			}
+			},			
+			{
+				path:'edit_plan',
+				name:'edit_plan',
+				component: edit_plan,
+			},
+
 		]
 	},
   	// 欢迎页面
