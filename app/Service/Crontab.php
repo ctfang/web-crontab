@@ -37,22 +37,33 @@ class Crontab
      */
     public static function restart()
     {
-        // 整合数据
-        $list = (new CrontabModel())->getUseList();
-        foreach ($list as $user=>$cmd){
-            $str = implode("\n",$cmd)."\n ";
-            file_put_contents(basePath('storage/crontabs/'.$user),$str);
+        $localPath = basePath('storage/crontabs/');
+        $files     = new Files();
+        $CrontabModel = new CrontabModel();
+        $list      = $CrontabModel->getUseList();// 整合数据
+        foreach ($list as $user => $cmd) {
+            $str  = implode("\n", $cmd) . "\n ";
+            $path = $localPath . $user;
+            $str  = $files->replace($files->get($path), Config::get('command.set_start'), Config::get('command.set_end'), $str);
+            $files->put($path, $str);
         }
-        die("OK");
+        // 生成版本
+        $CrontabModel->makeRelease();
         // 写入配置文件
-
-
+        $userLst = $files->getFiles($localPath);
+        foreach ($userLst as $path) {
+            $user    = pathinfo($path)['filename'];
+            $su_user = "su {$user}";
+            $cron_r  = Config::get('command.cron_path') . ' -r';
+            $init    = Config::get('command.cron_path') . ' ' . $path ;
+            $exit    = "exit";
+            pclose(popen("{$su_user} ; {$cron_r} ; {$init} ; {$exit}",'w'));
+        }
         // 重启服务器
         system(Config::get('command.crontab_restart'));
-
-
         // 设置已经重启
-        self::setIsRestart(false);
+        self::setIsRestart(true);
+        CronLog::restart();
     }
 
     /**
@@ -77,7 +88,7 @@ class Crontab
     /**
      * 设置重启信号
      *
-     * @param bool $status
+     * @param bool $status true 已经重启，false 需要重启
      */
     public static function setIsRestart($status=false)
     {

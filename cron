@@ -1,6 +1,8 @@
 #!/usr/bin/php
 <?php
-require __DIR__.'/vendor/autoload.php';
+use system\Config;
+
+require __DIR__ . '/vendor/autoload.php';
 
 require_once __DIR__ . '/bootstrap/functions.php';
 
@@ -30,5 +32,16 @@ $arr = explode('@',$run_info);
 
 $controller = "\\App\\Controller\\{$arr[0]}";
 $function   = $arr[1];
+
+/**
+ * --------------------------
+ * 检查是否有操作cron权限
+ * --------------------------
+ */
+$is_root = @scandir( Config::get('command.system_crontab_path','/var/spool/cron/crontabs') );
+if( $is_root===false ){
+    echo "sorry,you must be run as root";
+    die("\n");
+}
 
 call_user_func_array([new $controller(),$function],$argv);

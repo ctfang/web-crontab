@@ -7,9 +7,12 @@
  */
 
 return [
+    // 自动化核心命令，没分钟检查
     'check'=>'CheckRunCli@index',
-
-    'make'=>'CheckRunCli@make',
+    // 安装初始化命令
+    'init'=>'CheckRunCli@make',
+    // 导出本地任务到项目管理
+    'export'=>'CheckRunCli@export',
 
     'server'=>'CheckRunCli@error',
 

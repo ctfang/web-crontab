@@ -16,6 +16,11 @@ use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Lcobucci\JWT\ValidationData;
 use system\Config;
 
+/**
+ * 权限认证类
+ *
+ * @package App\Service
+ */
 class Authorization
 {
     private $issuer = 'web-crontab';

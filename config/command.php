@@ -7,15 +7,19 @@
  * Time: 17:49
  */
 return [
-    // 安装make命令配置
-    'make_check'=>[
-        'cmd'=>'* * * * * php '.basePath('cron').' check >> /dev/null 2>&1',
-        'file'=>'/var/spool/cron/crontabs/root',
-    ],
+    // 检查命令
+    'check'=>'* * * * * php '.basePath('cron').' check >> /dev/null 2>&1',
+
+    // 配置文件项目维护块标识
+    'set_start'=>"\n# 以下是web-cron的内容\n",
+    'set_end'=>"\n# 以上是web-cron的内容\n",
 
     // 重启命令
-    'crontab_restart'=>'sudo service cron restart',
+    'crontab_restart'=>'service cron restart',
 
     // cron命令目录
     'cron_path'=>'/usr/bin/crontab',
+
+    // 系统保存配置文件的路径
+    'system_crontab_path'=>'/var/spool/cron/crontabs',
 ];
