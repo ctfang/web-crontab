@@ -14,7 +14,7 @@ use system\Cache;
 class Lists
 {
     private static $_key = 'list/';
-    private static $_max = 25;
+    private static $_max = 6;
 
     /**
      * 链信息
@@ -29,8 +29,8 @@ class Lists
             return $info;
         }
         return [
-            'last_page'=>0,// 尾部
-            'first_page'=>0,// 头部
+            'last_page'=>1,// 尾部
+            'first_page'=>1,// 头部
             'count'=>0,// 页数
         ];
     }
@@ -50,20 +50,20 @@ class Lists
                 'first_page'=>1,// 头部
                 'count'=>1,// 页数
             ]);
-            Cache::set(Lists::$_key.$listName.'_page_1',[
-                'head'=>0,
+            Cache::set($this->getPath($listName,1),[
+                'head'=>1,
                 'tail'=>1,
                 'list'=>[$value]
             ]);
         }else{
-            $pageValue = Cache::get(Lists::$_key.$listName.'_page_'.$info['last_page']);
-            if( count($pageValue)<Lists::$_max ){
-                $pageValue[] = $value;
-                Cache::set(Lists::$_key.$listName.'_page_'.$info['last_page'],$pageValue);
+            $pageValue = Cache::get($this->getPath($listName,$info['last_page']));
+            if( count($pageValue['list'])<Lists::$_max ){
+                $pageValue['list'][] = $value;
+                Cache::set($this->getPath($listName,$info['last_page']),$pageValue);
             }else{
                 // 一页已经满，开新页
                 $info['last_page'] = $info['last_page']+1;
-                Cache::set(Lists::$_key.$listName.'_page_'.$info['last_page'],[
+                Cache::set($this->getPath($listName,$info['last_page']),[
                     'head'=>$info['last_page']-1,
                     'tail'=>$info['last_page'],
                     'list'=>[$value]
@@ -85,7 +85,19 @@ class Lists
     public function getPage($listName,$page)
     {
         $info = Cache::get( Lists::$_key.$listName.'_info' );
-        $info['data'] = Cache::get(Lists::$_key.$listName.'_page_'.$page);
+        $info['data'] = Cache::get($this->getPath($listName,$page));
         return $info;
+    }
+
+    /**
+     * 获取保存地址
+     *
+     * @param $listName
+     * @param int $page
+     * @return string
+     */
+    private function getPath($listName,$page=1)
+    {
+        return Lists::$_key.'/'.$listName.'/'.$page;
     }
 }

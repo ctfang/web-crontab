@@ -14,6 +14,7 @@ use App\Models\LocalModel;
 use App\Service\CronLog;
 use App\Service\Crontab;
 use App\Service\Files;
+use App\Service\Lists;
 use system\Cache;
 use system\Config;
 
@@ -101,7 +102,8 @@ class CheckRunCli
 
     public function test()
     {
-        $model = new Crontab();
-        $model::setIsRestart(false);
+        $model = new Lists();
+        $model->put('test',['time'=>time()]);
+        p($model->getPage('test',2));
     }
 }
