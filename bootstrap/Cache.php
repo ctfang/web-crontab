@@ -11,20 +11,29 @@ namespace system;
 
 class Cache
 {
+    /**
+     * @param $key
+     * @param $value
+     * @param bool $expired
+     *
+     */
     public static function set($key,$value,$expired=false)
     {
-        $data['data']     = $value;
-        $data['expired']  = $expired?$expired+time():false;
-        $string   = serialize($data);
-        $cacheDir = Config::get('storage').'/data/';
-        if( !is_dir($cacheDir) ){
-            mkdir($cacheDir,0755,true);
+        $data['data']    = $value;
+        $data['expired'] = $expired ? $expired + time() : false;
+        $string          = serialize($data);
+        $path            = Config::get('storage') . '/data/' . $key;
+        if (!is_dir(dirname($path))) {
+            mkdir(dirname($path), 0755, true);
         }
-        $path     = $cacheDir.$key;
 
-        file_put_contents($path,$string);
+        file_put_contents($path, $string);
     }
 
+    /**
+     * @param $key
+     * @return array|null
+     */
     public static function get($key)
     {
         $path     = Config::get('storage').'/data/'.$key;
