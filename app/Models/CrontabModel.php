@@ -232,6 +232,10 @@ class CrontabModel
         $files->copyDir($system_crontab_path,$savePath);
         // 生成存储链
         $lists     = new Lists();
-        $lists->put('cronRelease',$savePath);
+        $lists->put('cronRelease',[
+            'path'=>$savePath,
+            'tittle'=>'初始化备份',
+            'date'=>date('Y-m-d H:i:s')
+        ]);
     }
 }

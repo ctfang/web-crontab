@@ -108,6 +108,13 @@ class Files
      */
     public function copyDir($cource,$dest)
     {
+        if( !is_dir($dest) ){
+            mkdir($dest,0755,true);
+        }
 
+        $arr = $this->getFiles($cource);
+        foreach ($arr as $file=>$value_path){
+            copy($value_path,$dest.'/'.$file);
+        }
     }
 }

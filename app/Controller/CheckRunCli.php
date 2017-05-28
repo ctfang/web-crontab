@@ -103,7 +103,6 @@ class CheckRunCli
     public function test()
     {
         $model = new Lists();
-        $model->put('test',['time'=>time()]);
-        p($model->getPage('test',2));
+        p($model->getPage('cronRelease',1));
     }
 }
