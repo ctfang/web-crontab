@@ -6,17 +6,31 @@ global.VueCookie = VueCookie;
 //------------- axios -----------
 //
 import axios from 'axios'
-global.http =  	axios.create({
-  baseURL: 'http://localhost:1080/web-crontab/cron.php/',
-  timeout: 1000,
-  // 跨域不能设置头
-  headers: {
-	'Content-Type' : 'application/x-www-form-urlencoded',
-  },
-  params:{
-	 Authorization:VueCookie.get('Authorization')
-  }
-});
+global.http = {
+    config: {
+        baseURL: 'http://localhost:1080/index.php',
+        timeout: 1000,
+        // 跨域不能设置头
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+
+    },
+    get(url, config = {}) {
+        config = Object.assign(this.config, config);
+        if (config.headers && config.headers.Authorization || config.headers.Authorization) {
+            config.headers.Authorization = VueCookie.get('Authorization');
+        }
+        return axios.get(url, config);
+    },
+    post(url, data, config = {}) {
+        config = Object.assign(this.config, config);
+        if (config.headers && config.headers.Authorization || config.headers.Authorization) {
+            config.headers.Authorization = VueCookie.get('Authorization');
+        }
+        return axios.post(url, data, config);
+    }
+}
 
 
 //------------- axios -----------
@@ -26,20 +40,20 @@ global.http =  	axios.create({
  * 
  * @param  steing rurl
  */
-global.goto = function (rurl){
-	window.location.href="/#"+rurl;
-} 
+global.goto = function(rurl) {
+    window.location.href = "/#" + rurl;
+}
 
 /**
  * 检查是否登陆
  */
-global.islogin = function (){
+global.islogin = function() {
 
-  if( VueCookie.get('Authorization')!="undefined" && typeof(VueCookie.get('Authorization'))=="string" ){
+    if (VueCookie.get('Authorization') != "undefined" && typeof(VueCookie.get('Authorization')) == "string") {
 
-    return true;
+        return true;
 
-  }
+    }
 
-	return false;
+    return false;
 }

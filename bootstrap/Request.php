@@ -72,7 +72,7 @@ class Request
      */
     public function setRoute($route=null)
     {
-        $this->route = $route?$route:explode('?',$_SERVER['REQUEST_URI'])[0];
+        $this->route = $route?$route:explode('index.php',explode('?',$_SERVER['REQUEST_URI'])[0])[1];
     }
 
     public function getRoute()
