@@ -10,64 +10,67 @@ import command_list from '@/view/command_list'
 import add_plan from '@/view/add_plan'
 import plan_list from '@/view/plan_list'
 import edit_plan from '@/view/edit_plan'
+import plan_info from '@/view/plan_info'
 
 Vue.use(Router)
 
 export default new Router({
-	mode: 'history',
-  routes: [
-	{
-		path:'/index',
-		name:'Index',
-		component:Index,
-		children:[
-			{
-				path: '',
-				component: task
-			},
-			{
-				path: 'task',
-				name:'Task',
-				component: task
-			},
-			{
-				path:'add_command',
-				name:'add_command',
-				component: add_command,
-			},
-			{
-				path:'command_list',
-				name:'command_list',
-				component: command_list,
-			},
-			{
-				path:'add_plan',
-				name:'add_plan',
-				component: add_plan,
-			},
-			{
-				path:'plan_list',
-				name:'plan_list',
-				component: plan_list,
-			},			
-			{
-				path:'edit_plan',
-				name:'edit_plan',
-				component: edit_plan,
-			},
-
-		]
-	},
-  	// 欢迎页面
-    {
-      path: '/',
-      name: 'Hello',
-      component: Hello
-    },
-    // 登陆页面
-    {
-      path: '/login',
-      component: login
-    },
-  ]
+    mode: 'history',
+    routes: [{
+            path: '/index',
+            name: 'Index',
+            component: Index,
+            children: [{
+                    path: '',
+                    component: task
+                },
+                {
+                    path: 'task',
+                    name: 'Task',
+                    component: task
+                },
+                {
+                    path: 'add_command',
+                    name: 'add_command',
+                    component: add_command,
+                },
+                {
+                    path: 'command_list',
+                    name: 'command_list',
+                    component: command_list,
+                },
+                {
+                    path: 'add_plan',
+                    name: 'add_plan',
+                    component: add_plan,
+                },
+                {
+                    path: 'plan_list',
+                    name: 'plan_list',
+                    component: plan_list,
+                },
+                {
+                    path: 'edit_plan',
+                    name: 'edit_plan',
+                    component: edit_plan,
+                },
+                {
+                    path: 'plan_info/:name',
+                    name: 'plan_info',
+                    component: plan_info,
+                },
+            ]
+        },
+        // 欢迎页面
+        {
+            path: '/',
+            name: 'Hello',
+            component: Hello
+        },
+        // 登陆页面
+        {
+            path: '/login',
+            component: login
+        },
+    ]
 })

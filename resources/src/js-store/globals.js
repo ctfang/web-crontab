@@ -6,6 +6,18 @@ global.VueCookie = VueCookie;
 //------------- axios -----------
 //
 import axios from 'axios'
+
+// 潜复制
+let assign = (sup, sub) => {
+    let obj = {};
+    for (let k in sup) {
+        obj[k] = sup[k];
+    }
+    for (let key in sub) {
+        obj[key] = sub[key];
+    }
+    return obj;
+}
 global.http = {
     config: {
         baseURL: 'http://localhost:1080/index.php',
@@ -17,14 +29,14 @@ global.http = {
 
     },
     get(url, config = {}) {
-        config = Object.assign(this.config, config);
+        config = assign(this.config, config);
         if (config.headers && config.headers.Authorization || config.headers.Authorization) {
             config.headers.Authorization = VueCookie.get('Authorization');
         }
         return axios.get(url, config);
     },
     post(url, data, config = {}) {
-        config = Object.assign(this.config, config);
+        config = assign(this.config, config);
         if (config.headers && config.headers.Authorization || config.headers.Authorization) {
             config.headers.Authorization = VueCookie.get('Authorization');
         }

@@ -54,11 +54,11 @@
 				var qs = require('qs');
 				this.$refs[formName].validate((valid) => {
 				  if (valid) {
-					http.post('/login', qs.stringify({
+					http.post('/login', {
 						username: formData.username,
 						password: formData.password,
 						delivery: formData.delivery,
-					}))
+					})
 					.then(function (response) {
 						if(response.data.statusCode==10001){
 							VueCookie.set('Authorization', response.data.arrData.Authorization,24*3600);						

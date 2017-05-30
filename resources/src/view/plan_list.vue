@@ -1,30 +1,39 @@
 <template>
-  <el-table :data="tableData" border style="width: 100%">
+  <div>
+    <el-table :data="tableData" border style="width: 100%">
+    
+      <el-table-column fixed prop="name" label="方案名称">
+        <template scope="data">
+    
+            <router-link :to="{name:'plan_info',params:{name:data.row.name}}">{{data.row.name}}</router-link>
   
-    <el-table-column fixed prop="name" label="方案名称">
-  
-    </el-table-column>
-  
-    <el-table-column prop="remake" label="备注">
-  
-    </el-table-column>
-  
-    <el-table-column prop="created" label="创建时间">
-  
-    </el-table-column>
-  
-    <el-table-column fixed="right" label="操作" width="180">
-  
-      <template scope="scope">
-  
-          <router-link to='/index/edit_plan'><el-button type="text" size="small"><i class="el-icon-edit" /></el-button></router-link>
-  
-          <el-button type="text" @click="handleDelete(scope.$index,scope.row)"><i class="el-icon-delete" /></el-button>
-  
-          <el-switch v-model="status{{scope.$index}}" on-text="开" off-text="关"></el-switch>
-</template>
-    </el-table-column>
-  </el-table>
+        </template>
+      </el-table-column>
+    
+      <el-table-column prop="remake" label="备注">
+    
+      </el-table-column>
+    
+      <el-table-column prop="created" label="创建时间">
+    
+      </el-table-column>
+    
+      <el-table-column fixed="right" label="操作" width="180">
+    
+        <template scope="scope">
+    
+            <router-link to='/index/edit_plan'><el-button type="text" size="small"><i class="el-icon-edit" /></el-button></router-link>
+    
+            <el-button type="text" @click="handleDelete(scope.$index,scope.row)"><i class="el-icon-delete" /></el-button>
+    
+            <el-switch v-model="scope.row.statusKey" on-text="开" off-text="关"></el-switch>
+        </template>
+      </el-table-column>
+    </el-table>
+    <el-row style="margin-top:30px">
+      <router-link to="/index/add_plan"><el-button type="primary">添加方案</el-button></router-link>
+    </el-row>
+  </div>
 </template>
 
 <script>
@@ -71,6 +80,7 @@
               res.data.arrData.forEach((value,index)=>{
 
                 this['status'+index] = value.status;
+                value['statusKey'] = 'status'+index;
 
               })
               this.tableData = res.data.arrData;
