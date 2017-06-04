@@ -21,7 +21,7 @@ router.beforeEach(function(to, from, next) {
         console.log("退出登陆");
         next("/");
     } else {
-        验证的路由
+        // 验证的路由
         if (islogin() == false) {
             console.log("没有登陆重定向");
             next("/login");

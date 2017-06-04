@@ -11,6 +11,9 @@ import add_plan from '@/view/add_plan'
 import plan_list from '@/view/plan_list'
 import edit_plan from '@/view/edit_plan'
 import plan_info from '@/view/plan_info'
+import not_found from '@/view/not_found'
+import permission from '@/view/permission'
+import edit_command from '@/view/edit_command'
 
 Vue.use(Router)
 
@@ -22,15 +25,10 @@ export default new Router({
             component: Index,
             children: [{
                     path: '',
-                    component: task
+                    component: plan_list
                 },
                 {
-                    path: 'task',
-                    name: 'Task',
-                    component: task
-                },
-                {
-                    path: 'add_command',
+                    path: 'add_command/:plan_name',
                     name: 'add_command',
                     component: add_command,
                 },
@@ -59,6 +57,11 @@ export default new Router({
                     name: 'plan_info',
                     component: plan_info,
                 },
+                {
+                    path: 'edit_command/:name/:id',
+                    name: 'edit_command',
+                    component: edit_command,
+                },
             ]
         },
         // 欢迎页面
@@ -72,5 +75,11 @@ export default new Router({
             path: '/login',
             component: login
         },
+        // 没有权限
+        {
+            path: '/permission',
+            component: permission
+        },
+        { path: '*', component: not_found }
     ]
 })

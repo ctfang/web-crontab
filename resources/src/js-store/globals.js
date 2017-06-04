@@ -60,8 +60,8 @@ global.goto = function(rurl) {
  * 检查是否登陆
  */
 global.islogin = function() {
-
-    if (VueCookie.get('Authorization') != "undefined" && typeof(VueCookie.get('Authorization')) == "string") {
+    let cookies = VueCookie.get('Authorization');
+    if (cookies != "undefined" && typeof(cookies) == "string" && cookies != '') {
 
         return true;
 

@@ -49,6 +49,7 @@
 		},
 		methods: {
 			submitForm(formName) {
+				this.$router.push('/index');
 				var formData = this.ruleForm; // 表单数据
 				var _this   = this;
 				var qs = require('qs');
@@ -63,7 +64,7 @@
 						if(response.data.statusCode==10001){
 							VueCookie.set('Authorization', response.data.arrData.Authorization,24*3600);						
 							console.log(response.data.arrData.Authorization);
-							router.push('/index');
+							this.$router.push('/index');
 						}else{
 							console.log('login false');
 							_this.$message({type: 'warning',showClose: true,'message':'账号密码错误！'});

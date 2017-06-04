@@ -51,10 +51,15 @@
                   label="状态"
                   :span="3">
                 </el-table-column>
-
+                <el-table-column fixed="right" label="操作" width="180">
+                  <template scope="scope">
+                      <el-button type="text" @click="handleDelete(scope.row)"><i class="el-icon-delete" /></el-button>
+                      <router-link :to={name:'edit_command',params:{name:this.$route.params.name,id:scope.row.id}}><el-button type="text" size="small"><i class="el-icon-edit" /></el-button></router-link>
+                  </template>
+                </el-table-column>
           </el-table>
           <el-row style="margin-top:20px">
-                <router-link to="/index/add_command"><el-button type="primary">添加命令</el-button></router-link>
+                <router-link :to="{name:'add_command',params:{name:this.name}}"><el-button type="primary">添加命令</el-button></router-link>
                 <router-link to="/index/plan_list"><el-button>返回列表</el-button></router-link>
           </el-row>
          </div>
@@ -64,32 +69,46 @@
   export default {
 
     methods: {
+      switchPlan(){
 
+      },
+      handleDelete(row){
+        http.post('/cron/destroy',{
+          plan_name:this.$route.params.name,
+          id:row.id,
+        })
+      }
     },
     created(){
-        http.get('/plan/list')
+        http.get('/plan',{
+          params:{
+            name:this.$route.params.name,
+          }
+        })
         .then((res)=>{
+          if(res.data.statusCode==10001){
                 let data = res.data.arrData;
-                data = {
-                    name:'test',
-                    created:"123",
-                    remake:123,
-                    status:true,
-                    cron_list:[{
-                        name:'测试',
-                        runUser:'cmd',
-                        remake:'test',
-                        cmd:'123',
-                        created:'123456',
-                        status:true
-                    }]
-                }
+                // data = {
+                //     name:'test',
+                //     created:"123",
+                //     remake:123,
+                //     status:true,
+                //     cron_list:[{
+                //         name:'测试',
+                //         runUser:'cmd',
+                //         remake:'test',
+                //         cmd:'123',
+                //         created:'123456',
+                //         status:true
+                //     }]
+                // }
 
                 this.name = data.name;
                 this.created = data.created;
                 this.remake = data.remake;
                 this.status = data.status;
                 this.tableData = data.cron_list;
+          }
         })
     },
     data() {

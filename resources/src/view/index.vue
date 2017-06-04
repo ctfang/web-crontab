@@ -1,14 +1,14 @@
 <template>
 	<div class="container-flex" >
-		<el-menu theme="light" :default-active="activeIndex" class="el-menu-demo" style="display:flex;justify-content:flex-end"  mode="horizontal" @select="handleSelect">
+		<el-menu theme="light" :default-active="activeIndex" class="el-menu-demo" style="display:flex;justify-content:flex-end"  mode="horizontal">
 			<h3 style="position:absolute;left:30px;color:#555">WEB-CRONTAB</h3>
 			<router-link to="/index/plan_list"><el-menu-item index="1">方案管理</el-menu-item></router-link>
-			<el-menu-item index="2">启用管理</el-menu-item>
-			<el-menu-item index="3">启用历史</el-menu-item>			
-			<el-menu-item index="4">用户管理</el-menu-item>
+			<el-menu-item index="2" @click="tip">启用管理</el-menu-item>
+			<el-menu-item index="3" @click="tip">启用历史</el-menu-item>			
+			<el-menu-item index="4" @click="tip">用户管理</el-menu-item>
 			<el-submenu index="5">
 				<template slot="title">ADMIN</template>
-				<el-menu-item index="5-1">退出</el-menu-item>
+				<el-menu-item index="5-1" @click="outLogin">退出</el-menu-item>
 			</el-submenu>
 		</el-menu>
 		<el-row class="tac conatiner-main">
@@ -17,9 +17,7 @@
 					<div class="container-title">
 						<el-breadcrumb separator="/">
 						  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-						  <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-						  <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-						  <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+						  <el-breadcrumb-item>方案管理</el-breadcrumb-item>
 						</el-breadcrumb>
 					</div>
 					<div class="container">
@@ -44,15 +42,13 @@
       };
     },
     methods: {
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      }
+			tip(){
+				this.$message({type: 'warning',showClose: true,'message':'该功能正在开发中！'});
+			},
+			outLogin(){
+				VueCookie.set('Authorization', '');
+				this.$router.push('/');
+			}
     }
   }
 </script>

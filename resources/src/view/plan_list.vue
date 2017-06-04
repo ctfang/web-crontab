@@ -22,11 +22,10 @@
     
         <template scope="scope">
     
-            <router-link to='/index/edit_plan'><el-button type="text" size="small"><i class="el-icon-edit" /></el-button></router-link>
     
             <el-button type="text" @click="handleDelete(scope.$index,scope.row)"><i class="el-icon-delete" /></el-button>
     
-            <el-switch v-model="scope.row.statusKey" on-text="开" off-text="关"></el-switch>
+            <el-switch v-model="scope.row.statusKey" on-text="开" off-text="关" @change='switchPlan(scope.scope.row)'></el-switch>
         </template>
       </el-table-column>
     </el-table>
@@ -40,9 +39,16 @@
   export default {
   
     methods: {
-  
+      switchPlan(row){
+        http.post('/plan/edit', {
+          name:row.name,
+          status:row.status,
+          remake:row.remake,
+        }).then(()=>{
+          
+        })
+      },
       handleDelete(index, row) {
-        console.log(index,row)
         http.get('/plan/destroy', {
   
             params: {
@@ -62,20 +68,20 @@
     },
     created() {
       http.get('/plan/list').then((res) => {
-        res.data.statusCode = 10001;
-            res.data.arrData = [{
-                "created":"2017-05-07 03:45:14",
-                "name":"定时项目",
-                "remake":"这是测试备注",
-                "status":true
-            },
-            {
-                "created":"2017-05-07 03:46:42",
-                "name":"第二方案",
-                "remake":"这是测试备注",
-                "status":true
-            }]
-              if (res.data.statusCode == 10001) {
+        // res.data.statusCode = 10001;
+        //     // res.data.arrData = [{
+        //     //     "created":"2017-05-07 03:45:14",
+        //     //     "name":"定时项目",
+        //     //     "remake":"这是测试备注",
+        //     //     "status":true
+        //     // },
+        //     // {
+        //     //     "created":"2017-05-07 03:46:42",
+        //     //     "name":"第二方案",
+        //     //     "remake":"这是测试备注",
+        //     //     "status":true
+        //     // }]
+            if (res.data.statusCode == 10001) {
 
               res.data.arrData.forEach((value,index)=>{
 
@@ -92,7 +98,18 @@
   
       return {
   
-        tableData: [],
+        tableData:            [{
+                "created":"2017-05-07 03:45:14",
+                "name":"定时项目",
+                "remake":"这是测试备注",
+                "status":true
+            },
+            {
+                "created":"2017-05-07 03:46:42",
+                "name":"第二方案",
+                "remake":"这是测试备注",
+                "status":true
+            }],
         status1:true,
         status2:false
   
