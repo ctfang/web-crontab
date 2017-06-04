@@ -98,18 +98,7 @@
   
       return {
   
-        tableData:            [{
-                "created":"2017-05-07 03:45:14",
-                "name":"定时项目",
-                "remake":"这是测试备注",
-                "status":true
-            },
-            {
-                "created":"2017-05-07 03:46:42",
-                "name":"第二方案",
-                "remake":"这是测试备注",
-                "status":true
-            }],
+        tableData:[],
         status1:true,
         status2:false
   
