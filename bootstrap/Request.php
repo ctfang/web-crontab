@@ -74,7 +74,7 @@ class Request
     {
         $temp = explode('?',$_SERVER['REQUEST_URI'])[0];
         if( strpos($temp,'index.php')!==false ){
-            $temp = explode('index.php',$temp);
+            $temp = explode('index.php',$temp)[1];
         }
         $this->route = $route?$route:$temp;
     }
