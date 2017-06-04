@@ -79,6 +79,12 @@ class Crontab
         file_put_contents($cron->getLocalhostCrontabPath($runUser),$strCmd);
     }
 
+    /**
+     * 项目预先保存生效命令地址
+     *
+     * @param $runUser
+     * @return string
+     */
     public function getLocalhostCrontabPath($runUser)
     {
         return basePath('storage/crontabs/'.$runUser);

@@ -238,4 +238,19 @@ class CrontabModel
             'date'=>date('Y-m-d H:i:s')
         ]);
     }
+
+    /**
+     * 回滚
+     *
+     * @param $id
+     * @param $page
+     */
+    public function rollback($id,$page)
+    {
+        $list = (new Lists())->getPage('cronRelease',$page);
+        $arr  = $list[$id];
+        $files= new Files();
+        $files->delFiles(basePath('storage/crontabs/'));
+        $files->copyDir($arr['path'],basePath('storage/crontabs/'));
+    }
 }
