@@ -6,7 +6,6 @@ import Index from '@/view/index'
 import home from '@/view/home'
 import task from '@/view/task'
 import add_command from '@/view/add_command'
-import command_list from '@/view/command_list'
 import add_plan from '@/view/add_plan'
 import plan_list from '@/view/plan_list'
 import edit_plan from '@/view/edit_plan'
@@ -31,11 +30,6 @@ export default new Router({
                     path: 'add_command/:plan_name',
                     name: 'add_command',
                     component: add_command,
-                },
-                {
-                    path: 'command_list',
-                    name: 'command_list',
-                    component: command_list,
                 },
                 {
                     path: 'add_plan',
