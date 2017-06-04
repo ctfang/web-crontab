@@ -24,7 +24,7 @@ class PublicController
      */
     public function error()
     {
-        return "这里是404页面";
+        return file_get_contents(basePath('public/index.html'));
     }
 
     /**
