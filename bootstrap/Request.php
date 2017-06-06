@@ -74,7 +74,7 @@ class Request
     {
         $temp = explode('?',$_SERVER['REQUEST_URI'])[0];
         if( strpos($temp,'index.php')!==false ){
-            $temp = explode('index.php',$temp);
+            die('不能带index.php');
         }
         $this->route = $route?$route:$temp;
     }
