@@ -13,6 +13,10 @@ import plan_info from '@/view/plan_info'
 import not_found from '@/view/not_found'
 import permission from '@/view/permission'
 import edit_command from '@/view/edit_command'
+import check_command from '@/view/check_command'
+import use_command from '@/view/use_command'
+import enabled_history from '@/view/enabled_history'
+import restart_server from '@/view/restart_server'
 
 Vue.use(Router)
 
@@ -55,6 +59,26 @@ export default new Router({
                     name: 'edit_command',
                     component: edit_command,
                 },
+                {
+                    path: 'restart_server',
+                    name: 'restart_server',
+                    component: restart_server,
+                },
+                {
+                    path: 'enabled_history',
+                    name: 'enabled_history',
+                    component: enabled_history,
+                },
+                {
+                    path: 'check_command',
+                    name: 'check_command',
+                    component: check_command,
+                },
+                {
+                    path: 'use_command',
+                    name: 'use_command',
+                    component: use_command,
+                }
             ]
         },
         // 欢迎页面

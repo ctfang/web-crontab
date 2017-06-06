@@ -19,7 +19,6 @@ var webpackConfig = merge(baseWebpackConfig, {
         })
     },
     devtool: config.build.productionSourceMap ? '#source-map' : false,
-    watch: true,
     output: {
         path: config.build.assetsRoot,
         filename: utils.assetsPath('js/[name].[chunkhash].js'),

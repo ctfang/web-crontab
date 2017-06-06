@@ -27,7 +27,7 @@
       onSubmit(){
         http.post('/plan/edit',this.form)
         .then((result)=>{
-          router.push('/index/plan_list');
+          this.$router.push('/index/plan_list');
         })
       }
     }

@@ -3,8 +3,8 @@
 		<el-menu theme="light" :default-active="activeIndex" class="el-menu-demo" style="display:flex;justify-content:flex-end"  mode="horizontal">
 			<h3 style="position:absolute;left:30px;color:#555">WEB-CRONTAB</h3>
 			<router-link to="/index/plan_list"><el-menu-item index="1">方案管理</el-menu-item></router-link>
-			<el-menu-item index="2" @click="tip">启用管理</el-menu-item>
-			<el-menu-item index="3" @click="tip">启用历史</el-menu-item>			
+			<router-link to="/index/check_command"><el-menu-item index="2" @click="tip">启用管理</el-menu-item></router-link>
+			<router-link to="/index/enabled_history"><el-menu-item index="3" @click="tip">启用历史</el-menu-item>	</router-link>		
 			<el-menu-item index="4" @click="tip">用户管理</el-menu-item>
 			<el-submenu index="5">
 				<template slot="title">ADMIN</template>
@@ -43,7 +43,7 @@
     },
     methods: {
 			tip(){
-				this.$message({type: 'warning',showClose: true,'message':'该功能正在开发中！'});
+				//this.$message({type: 'warning',showClose: true,'message':'该功能正在开发中！'});
 			},
 			outLogin(){
 				VueCookie.set('Authorization', '');

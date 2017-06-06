@@ -55,25 +55,24 @@
 				var qs = require('qs');
 				this.$refs[formName].validate((valid) => {
 				  if (valid) {
-					http.post('/login', {
-						username: formData.username,
-						password: formData.password,
-						delivery: formData.delivery
-					})
-					.then(function (response) {
-						if(response.data.statusCode==10001){
-							VueCookie.set('Authorization', response.data.arrData.Authorization,24*3600);						
-							console.log(response.data.arrData.Authorization);
-							this.$router.push('/index');
-						}else{
-							console.log('login false');
-							_this.$message({type: 'warning',showClose: true,'message':'账号密码错误！'});
-						}
-						
-					})
-					.catch(()=>{
-						_this.$message({type: 'error',showClose: true,'message':'网络错误！'});
-					})
+						http.post('/login', {
+							username: formData.username,
+							password: formData.password,
+							delivery: formData.delivery
+						})
+						.then( (response) =>{
+							console.log(response)
+							if(response.data.statusCode==10001){
+								VueCookie.set('Authorization', response.data.arrData.Authorization,24*3600);						
+								console.log(response.data.arrData.Authorization);
+								this.$router.push('/index');
+							}else{
+								console.log('login false');
+								this.$message({type: 'warning',showClose: true,'message':'账号密码错误！'});
+							}
+							
+						})
+
 				  } else {
 					console.log('error submit!!');
 					return false;
