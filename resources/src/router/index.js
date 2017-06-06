@@ -17,7 +17,6 @@ import edit_command from '@/view/edit_command'
 Vue.use(Router)
 
 export default new Router({
-    mode: 'history',
     routes: [{
             path: '/index',
             name: 'Index',

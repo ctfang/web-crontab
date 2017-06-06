@@ -1,4 +1,5 @@
 import VueCookie from 'vue-cookie';
+var qs = require('qs');
 
 global.VueCookie = VueCookie;
 
@@ -31,16 +32,16 @@ global.http = {
     get(url, config = {}) {
         config = assign(this.config, config);
         if (config.headers && config.headers.Authorization || config.headers.Authorization) {
-            config.headers.Authorization = VueCookie.get('Authorization');
+            config.headers.HTTP_AUTHORIZATION = VueCookie.get('Authorization');
         }
         return axios.get(url, config);
     },
     post(url, data, config = {}) {
         config = assign(this.config, config);
         if (config.headers && config.headers.Authorization || config.headers.Authorization) {
-            config.headers.Authorization = VueCookie.get('Authorization');
+            config.headers.HTTP_AUTHORIZATION = VueCookie.get('Authorization');
         }
-        return axios.post(url, data, config);
+        return axios.post(url, qs.stringify(data), config);
     }
 }
 

@@ -58,7 +58,7 @@
 					http.post('/login', {
 						username: formData.username,
 						password: formData.password,
-						delivery: formData.delivery,
+						delivery: formData.delivery
 					})
 					.then(function (response) {
 						if(response.data.statusCode==10001){
