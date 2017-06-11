@@ -21,7 +21,6 @@
 
 <script>
 export default {
-  name: 'hello',
   data () {
     return {
       msg: '欢迎使用 WEB-CRONTAB 管理定时任务'
