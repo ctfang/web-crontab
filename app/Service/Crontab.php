@@ -28,10 +28,6 @@ class Crontab
      */
     private static $_is_restart_key = '_is_restart_key';
 
-    private $_cmd_start_notes = "\n# web-cron start \n";
-
-    private $_cmd_end_notes = "\n# web-cron end \n";
-
     /**
      * 重启crontab服务
      */
@@ -41,15 +37,14 @@ class Crontab
         $files     = new Files();
         $CrontabModel = new CrontabModel();
         $list      = $CrontabModel->getUseList();// 整合数据
+        // 生成预配置文件
         foreach ($list as $user => $cmd) {
             $str  = implode("\n", $cmd) . "\n ";
             $path = $localPath . $user;
             $str  = $files->replace($files->get($path), Config::get('command.set_start'), Config::get('command.set_end'), $str);
             $files->put($path, $str);
         }
-        // 生成版本
-        $CrontabModel->makeRelease();
-        // 写入配置文件
+        // 写入系统配置文件
         $userLst = $files->getFiles($localPath);
         foreach ($userLst as $path) {
             $user    = pathinfo($path)['filename'];

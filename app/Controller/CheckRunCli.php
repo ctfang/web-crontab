@@ -43,9 +43,9 @@ class CheckRunCli
             echo "sorry,cmd exists";
             die("\n");
         }
+        $cronModel->initRelease('接入系统前的备份','接入系统前的备份');
         $cronModel->insertCheck();
         echo "create check cmd\n";
-
         // 询问是否重启crontab服务
         fwrite(STDOUT,'Confirm restart service：（y/n）');
         $if = fgets(STDIN);
@@ -53,10 +53,23 @@ class CheckRunCli
         if( strpos($if,'y')!==false ){
             echo Config::get('command.crontab_restart')."\n";
             Crontab::restart();
+            $cronModel->initRelease('第一个备份','接入系统后，第一个的备份');
         }else{
             echo "Restart the cron service to take effect\n";
         }
 
+    }
+
+    /**
+     * 清理，还原成初始版本
+     */
+    public function clear()
+    {
+        $system_crontab_path = Config::get('command.system_crontab_path','/var/spool/cron/crontabs');
+        $savePath  = basePath('storage');
+        $files = new Files();
+        $files->delFiles($system_crontab_path);
+        $files->delFiles($savePath,true);
     }
 
     /**

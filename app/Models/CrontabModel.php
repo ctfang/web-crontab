@@ -227,7 +227,38 @@ class CrontabModel
      * @param string $name 版本名称
      * @param string $remark 说明
      */
-    public function makeRelease($name='初始化备份',$remark='初始化备份')
+    public function makeRelease($name,$remark)
+    {
+        $files     = new Files();
+        $savePath  = basePath('storage/release/'.date('Y-m-d').'-'.uniqid());
+        $localPath = basePath('storage/crontabs/');
+        $CrontabModel = new CrontabModel();
+        $list      = $CrontabModel->getUseList();// 整合数据
+        // 生成预配置文件
+        foreach ($list as $user => $cmd) {
+            $str  = implode("\n", $cmd) . "\n ";
+            $path = $localPath . $user;
+            $str  = $files->replace($files->get($path), Config::get('command.set_start'), Config::get('command.set_end'), $str);
+            $files->put($path, $str);
+        }
+        $files->copyDir($localPath,$savePath);
+        // 生成存储链
+        $lists     = new Lists();
+        $lists->put('cronRelease',[
+            'path'=>$savePath,
+            'tittle'=>$name,
+            'remark'=>$remark,
+            'date'=>date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /**
+     * 生成初始版本
+     *
+     * @param string $name
+     * @param string $remark
+     */
+    public function initRelease($name='初始化备份',$remark='初始化备份')
     {
         $files     = new Files();
         $system_crontab_path = Config::get('command.system_crontab_path','/var/spool/cron/crontabs');

@@ -14,6 +14,9 @@ return [
     // 导出本地任务到项目管理
     'export'=>'CheckRunCli@export',
 
+    // 情况所有
+    'clear'=>'CheckRunCli@clear',
+
     'server'=>'CheckRunCli@error',
 
     'test'=>'CheckRunCli@test',

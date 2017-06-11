@@ -71,7 +71,7 @@ class Files
      */
     public function getFiles($path)
     {
-        if( !file_exists($path) ){
+        if( !is_dir($path) ){
             return [];
         }
         $dir  = scandir($path);
@@ -91,11 +91,16 @@ class Files
      * @param $path
      * @return array
      */
-    public function delFiles($path)
+    public function delFiles($path,$is_r=false)
     {
         $list = $this->getFiles($path);
         foreach ($list as $pathFile){
-            unlink($pathFile);
+            if(is_file($pathFile)){
+                unlink($pathFile);
+            }elseif( $is_r ){
+                $this->delFiles($pathFile,$is_r);
+                rmdir($pathFile);
+            }
         }
     }
 
