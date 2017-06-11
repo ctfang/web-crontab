@@ -9,7 +9,7 @@
         <el-table :data="tableData" border style="width: 100%">
         <el-table-column fixed prop="name" label="运行用户">
         </el-table-column>
-        <el-table-column prop="remake" label="时间">
+        <el-table-column prop="remark" label="时间">
         </el-table-column>
         <el-table-column prop="created" label="命令">
         </el-table-column>

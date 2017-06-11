@@ -29,15 +29,15 @@ class PlanModel
      * 创建
      *
      * @param $name
-     * @param $remake 备注
+     * @param $remark 备注
      * @param bool $status
      */
-    public function create($name,$remake,$status=false)
+    public function create($name,$remark,$status=false)
     {
         $data = [
             'created'=>date('Y-m-d H:i:s'),
             'name'=>$name,
-            'remake'=>$remake,
+            'remark'=>$remark,
             'status'=>$status,
         ];
 
@@ -49,11 +49,11 @@ class PlanModel
     /**
      * 编辑
      */
-    public function edit($name,$remake,$status=null)
+    public function edit($name,$remark,$status=null)
     {
         $data = $this->show($name);
 
-        $remake!==null and $data['remake'] = $remake;
+        $remark!==null and $data['remark'] = $remark;
         $status!==null and $data['status'] = $status;
 
         $list = Cache::get(PlanModel::getListkey(),[]);
@@ -81,6 +81,8 @@ class PlanModel
         if( !isset($list[$name]) ){
             return [];
         }
+        $cron = new CrontabModel();
+        $list[$name]['cmd-list'] = $cron->lists($list[$name]['name']);
         $plan = $list[$name];
         return $plan;
     }

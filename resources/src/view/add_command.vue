@@ -25,7 +25,7 @@
 		<el-input v-model="form.cronteb.cmd"></el-input>
 	  </el-form-item>
 	  <el-form-item label="备注">
-		<el-input v-model="form.remake"></el-input>
+		<el-input v-model="form.remark"></el-input>
 	  </el-form-item>
 	  <el-form-item>
 		<el-button type="primary" @click="onSubmit">立即创建</el-button>
@@ -47,7 +47,7 @@
 						cmd:'',
 						month:'',
 					},
-					remake:'',
+					remark:'',
 					run_user:'',
 					plan_name:this.$route.params.name,
 					id:this.$route.params.id,

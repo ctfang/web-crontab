@@ -36,17 +36,17 @@ class CrontabModel
      * @param $runUser 运行用户
      * @param $planName 方案名称
      * @param $cmd  命令
-     * @param $remake 备注
+     * @param $remark 备注
      * @return mixed 命令id
      */
-    public function create($runUser,$planName,$cmd,$remake)
+    public function create($runUser,$planName,$cmd,$remark)
     {
         $data = [
             'id'=>$this->getCmdId($planName),
             'created'=>date('Y-m-d H:i:s'),
             'runUser'=>$runUser,
             'cmd'=>$cmd,
-            'remake'=>$remake,
+            'remark'=>$remark,
             'status'=>true,
         ];
 
@@ -84,13 +84,13 @@ class CrontabModel
     /**
      * 编辑
      */
-    public function edit($id,$runUser,$planName,$cmd,$remake,$status)
+    public function edit($id,$runUser,$planName,$cmd,$remark,$status)
     {
         $data = $this->show($planName,$id);
 
         $runUser!==null and $data['runUser'] = $runUser;
         $cmd!==null     and $data['cmd'] = $cmd;
-        $remake!==null  and $data['remake'] = $remake;
+        $remark!==null  and $data['remark'] = $remark;
         $status!==null  and $data['status'] = $status;
 
         $list = Cache::get($this->getPlanListKey($planName));

@@ -39,11 +39,11 @@ class CrontabController
      */
     public function store()
     {
-        $remake     = request()->post('remake');
+        $remark     = request()->post('remark');
         $runUser    = request()->post('run_user');
         $planName   = request()->post('plan_name');
         $cmd        = request()->post('cronteb');
-        if( empty($remake) || empty($runUser) || empty($planName) || empty($cmd) ){
+        if( empty($remark) || empty($runUser) || empty($planName) || empty($cmd) ){
             return Output::error('参数缺失',40004);
         }
         $cronModel  = new CrontabModel();
@@ -51,7 +51,7 @@ class CrontabController
         if( !$planModel->isHas($planName) ){
             return Output::error('方案不存在',40005);
         }
-        $cronModel->create($runUser,$planName,$cmd,$remake);
+        $cronModel->create($runUser,$planName,$cmd,$remark);
         return Output::success();
     }
 
@@ -60,7 +60,7 @@ class CrontabController
      */
     public function edit()
     {
-        $remake     = request()->post('remake');
+        $remark     = request()->post('remark');
         $runUser    = request()->post('run_user');
         $planName   = request()->post('plan_name');
         $cmd        = request()->post('cronteb');
@@ -78,7 +78,7 @@ class CrontabController
         if( !$planModel->isHas($planName) ){
             return Output::error('方案不存在',40005);
         }
-        $cronModel->edit($id,$runUser,$planName,$cmd,$remake,$status);
+        $cronModel->edit($id,$runUser,$planName,$cmd,$remark,$status);
         return Output::success();
     }
 

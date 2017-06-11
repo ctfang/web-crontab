@@ -20,6 +20,7 @@ class PlanController
     public function index()
     {
         $list = (new PlanModel())->lists();
+        $list = array_values($list);
         return empty($list)?Output::success('方案列表','10000',[]):Output::success('方案列表','10001',$list);
     }
 
@@ -44,15 +45,15 @@ class PlanController
     public function store()
     {
         $name   = request()->post('name');
-        $remake = request()->post('remark');
-        if( empty($name) || empty($remake) ){
+        $remark = request()->post('remark');
+        if( empty($name) || empty($remark) ){
             return Output::error('参数缺失',40004);
         }
         $PlanModel = new PlanModel();
         if( $PlanModel->isHas($name) ){
             return Output::error('方案已存在',40003);
         }
-        $PlanModel->create($name,$remake,true);
+        $PlanModel->create($name,$remark,true);
         return Output::success();
     }
 
@@ -62,7 +63,7 @@ class PlanController
     public function edit()
     {
         $name   = request()->post('name');
-        $remake = request()->post('remake');
+        $remark = request()->post('remark');
         $status = request()->post('status');
         if($status!==null){
             $status = $status==1?true:false;
@@ -74,7 +75,7 @@ class PlanController
         if( !$PlanModel->isHas($name) ){
             return Output::error('方案不存在',40004);
         }
-        $PlanModel->edit($name,$remake,$status);
+        $PlanModel->edit($name,$remark,$status);
         return Output::success();
     }
 

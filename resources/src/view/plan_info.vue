@@ -7,7 +7,7 @@
                 </el-row>
                 <el-row>
                         <el-col :span="3">备注：</el-col>
-                        <el-col :span="10">{{remake}}</el-col>
+                        <el-col :span="10">{{remark}}</el-col>
                 </el-row>
                 <el-row>
                         <el-col :span="3">创建时间：</el-col>
@@ -32,7 +32,7 @@
                   :span="3">
                 </el-table-column>
                 <el-table-column
-                  prop="remake"
+                  prop="remark"
                   label="备注"
                   :span="3">
                 </el-table-column>
@@ -91,12 +91,12 @@
                 // data = {
                 //     name:'test',
                 //     created:"123",
-                //     remake:123,
+                //     remark:123,
                 //     status:true,
                 //     cron_list:[{
                 //         name:'测试',
                 //         runUser:'cmd',
-                //         remake:'test',
+                //         remark:'test',
                 //         cmd:'123',
                 //         created:'123456',
                 //         status:true
@@ -105,7 +105,7 @@
 
                 this.name = data.name;
                 this.created = data.created;
-                this.remake = data.remake;
+                this.remark = data.remark;
                 this.status = data.status;
                 this.tableData = data.cron_list;
           }
@@ -116,7 +116,7 @@
         tableData: [],
         created:"",
         name:"",
-        remake:"",
+        remark:"",
         status:'',
       }
     }

@@ -6,7 +6,7 @@
             <router-link :to="{name:'plan_info',params:{name:data.row.name}}">{{data.row.name}}</router-link>
         </template>
       </el-table-column>
-      <el-table-column prop="remake" label="备注">
+      <el-table-column prop="remark" label="备注">
       </el-table-column>
       <el-table-column prop="created" label="创建时间">
       </el-table-column>
@@ -31,7 +31,7 @@
         http.post('/plan/edit', {
           name:row.name,
           status:row.status,
-          remake:row.remake,
+          remark:row.remark,
         }).then(()=>{
           
         })
@@ -60,13 +60,13 @@
         //     // res.data.arrData = [{
         //     //     "created":"2017-05-07 03:45:14",
         //     //     "name":"定时项目",
-        //     //     "remake":"这是测试备注",
+        //     //     "remark":"这是测试备注",
         //     //     "status":true
         //     // },
         //     // {
         //     //     "created":"2017-05-07 03:46:42",
         //     //     "name":"第二方案",
-        //     //     "remake":"这是测试备注",
+        //     //     "remark":"这是测试备注",
         //     //     "status":true
         //     // }]
             if (res.data.statusCode == 10001) {

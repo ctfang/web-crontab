@@ -3,7 +3,7 @@
     <el-table :data="tableData" border style="width: 100%">
       <el-table-column fixed prop="name" label="日期"> 
       </el-table-column>
-      <el-table-column prop="remake" label="上线名称">
+      <el-table-column prop="remark" label="上线名称">
       </el-table-column>
       <el-table-column prop="created" label="说明">
       </el-table-column>
