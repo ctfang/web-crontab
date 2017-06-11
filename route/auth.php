@@ -51,4 +51,7 @@ return [
 
     // 获取上次启用信息-时间和标示
     '/cron/restart/info'=>'HomeController@getRestartinfo',
+
+    // 获取版本历史
+    '/release/list'=>'HomeController@getReleaseList',
 ];
