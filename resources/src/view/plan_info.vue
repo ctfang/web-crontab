@@ -22,7 +22,7 @@
                 border
                 style="width: 100%">
                 <el-table-column
-                  prop="name"
+                  prop="id"
                   label="编号"
                   :span="3">
                 </el-table-column>
@@ -37,7 +37,7 @@
                   :span="3">
                 </el-table-column>
                 <el-table-column
-                  prop="cmd"
+                  prop="cmd.cmd"
                   label="命令"
                   :span="3">
                 </el-table-column>
@@ -53,13 +53,13 @@
                 </el-table-column>
                 <el-table-column fixed="right" label="操作" width="180">
                   <template scope="scope">
-                      <el-button type="text" @click="handleDelete(scope.row)"><i class="el-icon-delete" /></el-button>
-                      <router-link :to={name:'edit_command',params:{name:this.$route.params.name,id:scope.row.id}}><el-button type="text" size="small"><i class="el-icon-edit" /></el-button></router-link>
+                      <el-button type="text" @click="handleDelete(scope.$index,scope.row)"><i class="el-icon-delete" /></el-button>
+                      <router-link :to="{name:'edit_command',params:{name:$route.params.name,id:scope.row.id}}"><el-button type="text" size="small"><i class="el-icon-edit" /></el-button></router-link>
                   </template>
                 </el-table-column>
           </el-table>
           <el-row style="margin-top:20px">
-                <router-link :to="{name:'add_command',params:{name:this.name}}"><el-button type="primary">添加命令</el-button></router-link>
+                <router-link :to="{name:'add_command',params:{name:name}}"><el-button type="primary">添加命令</el-button></router-link>
                 <router-link to="/index/plan_list"><el-button>返回列表</el-button></router-link>
           </el-row>
          </div>
@@ -72,13 +72,19 @@
       switchPlan(){
 
       },
-      handleDelete(row){
+      handleDelete(index,row){
         http.post('/cron/destroy',{
           plan_name:this.$route.params.name,
           id:row.id,
         })
+        .then((res)=>{
+          if(res.data.statusCode==10000){
+            this.tableData.splice(index,1);
+          }
+        })
       }
     },
+    
     created(){
         http.get('/plan',{
           params:{
@@ -107,7 +113,7 @@
                 this.created = data.created;
                 this.remark = data.remark;
                 this.status = data.status;
-                this.tableData = data.cron_list;
+                this.tableData = objectToArray(data['cmd-list']);
           }
         })
     },

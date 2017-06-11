@@ -70,3 +70,11 @@ global.islogin = function() {
 
     return false;
 }
+
+global.objectToArray = function(obj) {
+    let arr = [];
+    for (let key in obj) {
+        arr.push(obj[key]);
+    }
+    return arr;
+}

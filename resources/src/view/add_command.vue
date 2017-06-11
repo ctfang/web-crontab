@@ -58,7 +58,7 @@
       onSubmit() {
 				http.post('/cron/store',this.form)
 				.then((res)=>{
-					if(res.data.statusCode=='10001'){
+					if(res.data.statusCode==10000){
 						this.$router.push({name:'plan_list',params:{name:this.$route.params.name}});
 					}
 				})

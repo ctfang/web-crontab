@@ -1,28 +1,28 @@
 <template>
 	<el-form  ref="form" :model="form" label-width="80px">
 	  <el-form-item label="方案名称">
-		<el-input v-model="form.plan_name" :disabled="true"></el-input>
+		<el-input v-model="form.name" :disabled="true"></el-input>
 	  </el-form-item>
 	  <el-form-item label="运行用户">
-		<el-input v-model="form.run_user"></el-input>
+		<el-input v-model="form.runUser"></el-input>
 	  </el-form-item>
 	  <el-form-item label="月">
-		<el-input v-model="form.cronteb.month"></el-input>
+		<el-input v-model="form.cmd.month"></el-input>
 	  </el-form-item>
 	  <el-form-item label="周">
-		<el-input v-model="form.cronteb.week"></el-input>
+		<el-input v-model="form.cmd.week"></el-input>
 	  </el-form-item>
 	  <el-form-item label="日">
-		<el-input v-model="form.cronteb.day"></el-input>
+		<el-input v-model="form.cmd.day"></el-input>
 	  </el-form-item>
 	  <el-form-item label="小时">
-		<el-input v-model="form.cronteb.hour"></el-input>
+		<el-input v-model="form.cmd.hour"></el-input>
 	  </el-form-item>
 	  <el-form-item label="分钟">
-		<el-input v-model="form.cronteb.minute"></el-input>
+		<el-input v-model="form.cmd.minute"></el-input>
 	  </el-form-item>
 	  <el-form-item label="具体命令">
-		<el-input v-model="form.cronteb.cmd"></el-input>
+		<el-input v-model="form.cmd.cmd"></el-input>
 	  </el-form-item>
 	  <el-form-item label="备注">
 		<el-input v-model="form.remark"></el-input>
@@ -39,7 +39,7 @@
     data() {
       return {
         form: {
-            cronteb:{
+            cmd:{
                 minute:'',
                 hour:'',
                 day:'',
@@ -54,8 +54,24 @@
         }
       }
     },
+		created(){
+			http.get('/cron/show',{
+				params:{
+					id:this.$route.params.id,
+					plan_name:this.$route.params.name,
+				}
+			})
+			.then((res)=>{
+				if(res.data.statusCode=='10001'){
+					this.form = res.data.arrData;
+					console.log(this.form)
+				}
+			})
+		},
     methods: {
       onSubmit() {
+				let data = Object.parse(Object.stringify(this.form));
+				data.cronteb = data.cmd;
         http.post('/cron/edit',this.form)
         .then((res)=>{
             if(res.data.statusCode=='10001'){

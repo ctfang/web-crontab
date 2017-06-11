@@ -27,10 +27,11 @@ export default new Router({
             component: Index,
             children: [{
                     path: '',
+                    name: 'default',
                     component: plan_list
                 },
                 {
-                    path: 'add_command/:plan_name',
+                    path: 'add_command/:name',
                     name: 'add_command',
                     component: add_command,
                 },
@@ -90,13 +91,19 @@ export default new Router({
         // 登陆页面
         {
             path: '/login',
+            name: 'Login',
             component: login
         },
         // 没有权限
         {
             path: '/permission',
+            name: 'Permission',
             component: permission
         },
-        { path: '*', component: not_found }
+        {
+            path: '*',
+            name: 'not_found',
+            component: not_found,
+        }
     ]
 })
