@@ -1,7 +1,7 @@
 <template>
 	<el-form  ref="form" :model="form" label-width="80px">
 	  <el-form-item label="方案名称">
-		<el-input v-model="form.plan_name" :disabled="true"></el-input>
+		<el-input v-model="form.name" :disabled="true"></el-input>
 	  </el-form-item>
 	  <el-form-item label="运行用户">
 		<el-input v-model="form.runUser"></el-input>
