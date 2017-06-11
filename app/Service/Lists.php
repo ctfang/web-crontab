@@ -98,6 +98,6 @@ class Lists
      */
     private function getPath($listName,$page=1)
     {
-        return Lists::$_key.'/'.$listName.'/'.$page;
+        return Lists::$_key.$listName.'/'.$page;
     }
 }
