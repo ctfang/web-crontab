@@ -43,6 +43,9 @@ class Lists
      */
     public function put($listName,$value)
     {
+        if( !isset($value['status']) ){
+            $value['status'] = 0;// 默认状态
+        }
         $info = $this->info($listName);
         if( $info['count']==0 ){
             Cache::set(Lists::$_key.$listName.'_info',[
@@ -50,6 +53,7 @@ class Lists
                 'first_page'=>1,// 头部
                 'count'=>1,// 页数
             ]);
+            $value['id'] = 1;
             Cache::set($this->getPath($listName,1),[
                 'head'=>1,
                 'tail'=>1,
@@ -57,6 +61,8 @@ class Lists
             ]);
         }else{
             $pageValue = Cache::get($this->getPath($listName,$info['last_page']));
+            // 计算id
+            $value['id'] = end($pageValue['list'])['id']+1;
             if( count($pageValue['list'])<Lists::$_max ){
                 $pageValue['list'][] = $value;
                 Cache::set($this->getPath($listName,$info['last_page']),$pageValue);
