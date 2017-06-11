@@ -11,6 +11,7 @@ namespace App\Controller;
 
 use App\Models\CrontabModel;
 use App\Service\Crontab;
+use App\Service\Lists;
 use App\Service\Output;
 
 class HomeController
@@ -78,5 +79,16 @@ class HomeController
         // 生成版本
         (new CrontabModel())->makeRelease($name,$remark);
         return Output::success('',10001,true);
+    }
+
+    /**
+     * 获取版本历史
+     */
+    public function getReleaseList()
+    {
+        $page  = request()->get('page',1);
+        $model = new Lists();
+        $data  = $model->getPage('cronRelease',$page);
+        return Output::success('获取版本历史',10001,$data);
     }
 }
