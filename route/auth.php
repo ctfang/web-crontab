@@ -47,5 +47,5 @@ return [
     '/cron/list'=>'CrontabController@index',
 
     // 确认命令-生成版本
-    '/cron/make/release'=>'HomeController@Release',
+    '/cron/make/release'=>'HomeController@makeRelease',
 ];

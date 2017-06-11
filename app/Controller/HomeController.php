@@ -60,6 +60,9 @@ class HomeController
     {
         $name   = request()->post('name');
         $remark = request()->post('remark');
+        if( empty($name) || empty($remark) ){
+            return Output::error('参数缺失',40004);
+        }
         // 生成版本
         (new CrontabModel())->makeRelease($name,$remark);
         return Output::success('',10001,true);
