@@ -47,9 +47,9 @@
 
           })
           .then((res) => {
-
-            delete this.tableData[index];
-
+            if( res.data.statusCode==10000 ){
+              delete this.tableData.splice(index,1);
+            }
           })
       }
 

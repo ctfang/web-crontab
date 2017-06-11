@@ -28,7 +28,7 @@
 	  console.log(this.form)
         http.post('/plan/store',this.form)
 		.then((result)=>{
-			router.push('/index/plan_list');
+			this.$router.push('/index/plan_list');
 		})
       }
     }
