@@ -42,4 +42,7 @@ return [
 
     // 获取生效时间
     '/server/time'=>'HomeController@getRestartTime',
+
+    // 检查命令-所有命令
+    '/cron/list'=>'CrontabController@index',
 ];

@@ -16,6 +16,25 @@ use App\Service\Output;
 class CrontabController
 {
     /**
+     * 所有命令
+     */
+    public function index()
+    {
+        $list       = (new PlanModel())->lists();
+        foreach ($list as $item){
+            if( $item['status'] ){
+                foreach ($item['cmd-list'] as $arrCmd){
+                    if( $arrCmd['status'] ){
+                        $newList[] = $arrCmd;
+                    }
+                }
+
+            }
+        }
+        return $newList;
+    }
+
+    /**
      * 命令信息
      */
     public function show()
