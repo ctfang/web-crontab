@@ -14,7 +14,7 @@ use system\Cache;
 class Lists
 {
     private static $_key = 'list/';
-    private static $_max = 6;
+    private static $_max = 15;
 
     /**
      * 链信息
@@ -82,9 +82,12 @@ class Lists
      * @param $page
      * @return array|null
      */
-    public function getPage($listName,$page)
+    public function getPage($listName,$page=0)
     {
         $info = Cache::get( Lists::$_key.$listName.'_info' );
+        if( !$page ){
+            $page = $info['last_page'];
+        }
         $info['data'] = Cache::get($this->getPath($listName,$page));
         return $info;
     }

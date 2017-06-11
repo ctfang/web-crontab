@@ -86,7 +86,7 @@ class HomeController
      */
     public function getReleaseList()
     {
-        $page  = request()->get('page',1);
+        $page  = request()->get('page',0);
         $model = new Lists();
         $data  = $model->getPage('cronRelease',$page);
         return Output::success('获取版本历史',10001,$data);
