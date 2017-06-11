@@ -223,8 +223,11 @@ class CrontabModel
 
     /**
      * 记录版本
+     *
+     * @param string $name 版本名称
+     * @param string $remark 说明
      */
-    public function makeRelease()
+    public function makeRelease($name='初始化备份',$remark='初始化备份')
     {
         $files     = new Files();
         $system_crontab_path = Config::get('command.system_crontab_path','/var/spool/cron/crontabs');
@@ -234,7 +237,8 @@ class CrontabModel
         $lists     = new Lists();
         $lists->put('cronRelease',[
             'path'=>$savePath,
-            'tittle'=>'初始化备份',
+            'tittle'=>$name,
+            'remark'=>$remark,
             'date'=>date('Y-m-d H:i:s')
         ]);
     }

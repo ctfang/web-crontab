@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Models\CrontabModel;
 use App\Service\Crontab;
 use App\Service\Output;
 
@@ -59,6 +60,8 @@ class HomeController
     {
         $name   = request()->post('name');
         $remark = request()->post('remark');
-
+        // 生成版本
+        (new CrontabModel())->makeRelease($name,$remark);
+        return Output::success('',10001,true);
     }
 }
