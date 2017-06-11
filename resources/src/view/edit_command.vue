@@ -1,7 +1,7 @@
 <template>
 	<el-form  ref="form" :model="form" label-width="80px">
 	  <el-form-item label="方案名称">
-		<el-input v-model="form.name" :disabled="true"></el-input>
+		<el-input v-model="form.plan_name" :disabled="true"></el-input>
 	  </el-form-item>
 	  <el-form-item label="运行用户">
 		<el-input v-model="form.runUser"></el-input>
@@ -64,17 +64,19 @@
 			.then((res)=>{
 				if(res.data.statusCode=='10001'){
 					this.form = res.data.arrData;
+					this.form.plan_name = this.$route.params.name
 					console.log(this.form)
 				}
 			})
 		},
     methods: {
       onSubmit() {
-				let data = Object.parse(Object.stringify(this.form));
+				let data = JSON.parse(JSON.stringify(this.form));
 				data.cronteb = data.cmd;
-        http.post('/cron/edit',this.form)
+				delete data.cmd;
+        http.post('/cron/edit',data)
         .then((res)=>{
-            if(res.data.statusCode=='10001'){
+            if(res.data.statusCode==10000){
                 this.$router.push({name:'plan_list',params:{name:this.$route.params.name}});
             }
         })

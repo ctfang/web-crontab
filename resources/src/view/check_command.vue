@@ -7,13 +7,16 @@
             <el-step title="完成" description=""></el-step>
         </el-steps>
         <el-table :data="tableData" border style="width: 100%">
-        <el-table-column fixed prop="name" label="运行用户">
+        <el-table-column fixed prop="runUser" label="运行用户">
         </el-table-column>
         <el-table-column prop="remark" label="时间">
         </el-table-column>
         <el-table-column prop="created" label="命令">
         </el-table-column>
         </el-table>
+        <el-row style="text-align:center;margin-top:15px;">
+            <router-link to='/index/use_command'><el-button>默认按钮</el-button></router-link>
+        </el-row>
     </div>
 </template>
 
@@ -23,6 +26,12 @@
         return {
             tableData:[]
         }
+    },
+    created(){
+        http.post('/cron/list')
+        .then((res)=>{
+            this.tableData = res.data;
+        })
     },
     methods: {
 

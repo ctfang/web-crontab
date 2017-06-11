@@ -50,6 +50,9 @@
                   prop="status"
                   label="状态"
                   :span="3">
+                  <template scope="data">
+                      {{data.row.status?'开启':'关闭'}}
+                  </template>
                 </el-table-column>
                 <el-table-column fixed="right" label="操作" width="180">
                   <template scope="scope">
