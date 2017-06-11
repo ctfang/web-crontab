@@ -44,7 +44,7 @@ class PlanController
     public function store()
     {
         $name   = request()->post('name');
-        $remake = request()->post('remake');
+        $remake = request()->post('remark');
         if( empty($name) || empty($remake) ){
             return Output::error('参数缺失',40004);
         }
