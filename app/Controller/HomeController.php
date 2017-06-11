@@ -16,6 +16,15 @@ use App\Service\Output;
 class HomeController
 {
     /**
+     * 获取上次启用信息-时间和标示
+     */
+    public function getRestartinfo()
+    {
+        $data = Crontab::getRestartInfo();
+        return Output::success('获取上次启用信息-时间和标示','10001',$data);
+    }
+
+    /**
      * 获取多少秒后重启
      */
     public function getRestartTime()

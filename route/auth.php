@@ -48,4 +48,7 @@ return [
 
     // 确认命令-生成版本
     '/cron/make/release'=>'HomeController@makeRelease',
+
+    // 获取上次启用信息-时间和标示
+    '/cron/restart/info'=>'HomeController@getRestartinfo',
 ];

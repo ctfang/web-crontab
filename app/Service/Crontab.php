@@ -103,6 +103,7 @@ class Crontab
             Cache::set(self::$_is_restart_key,[
                 'status'=>true,// 已经重启
                 'restart_time'=>time(),// 执行重启时间
+                'restart_id'=>uniqid(),// 重启唯一标识
             ]);
         }else{
             // 新增重启
