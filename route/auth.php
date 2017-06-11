@@ -45,4 +45,7 @@ return [
 
     // 检查命令-所有命令
     '/cron/list'=>'CrontabController@index',
+
+    // 确认命令-生成版本
+    '/cron/make/release'=>'HomeController@Release',
 ];

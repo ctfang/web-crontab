@@ -51,4 +51,14 @@ class HomeController
         // 还没有完成重启
         return Output::success('',10001,true);
     }
+
+    /**
+     * 确认启用命令
+     */
+    public function makeRelease()
+    {
+        $name   = request()->post('name');
+        $remark = request()->post('remark');
+
+    }
 }
