@@ -21,6 +21,9 @@ class HomeController
     public function getRestartinfo()
     {
         $data = Crontab::getRestartInfo();
+        if( !$data ){
+            return Output::error('没有重启信息',10000);
+        }
         return Output::success('获取上次启用信息-时间和标示','10001',$data);
     }
 
