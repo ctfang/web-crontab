@@ -58,7 +58,7 @@
          onSubmit(){
             http.post('/cron/make/release',this.form)
             .then((res)=>{
-                if(res.data.statusCode==10000){
+                if(res.data.statusCode==10001){
                     this.$router.push('/index/restart_server');
                 }
             })
