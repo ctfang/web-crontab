@@ -18,20 +18,6 @@
             <el-button @click="dialogFormVisible = true">确认按钮</el-button>
         </el-row>
 
-        <el-dialog title="确认使用" :visible.sync="dialogFormVisible">
-        <el-form :model="form">
-            <el-form-item label="历史名称" :label-width="formLabelWidth">
-                <el-input v-model="form.name" auto-complete="off"></el-input>
-            </el-form-item>
-            <el-form-item label="细节说明" :label-width="formLabelWidth">
-                <el-input v-model="form.remark" auto-complete="off"></el-input>
-            </el-form-item>
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-            <el-button @click="dialogFormVisible = false">取 消</el-button>
-            <el-button type="primary" @click="onSubmit" @click="dialogFormVisible = false">确 定</el-button>
-        </div>
-        </el-dialog>
     </div>
 </template>
 
