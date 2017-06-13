@@ -21,7 +21,7 @@ let assign = (sup, sub) => {
 }
 global.http = {
     config: {
-        baseURL: 'http://localhost:1080',
+        baseURL: 'http://localhost',
         timeout: 1000,
         // 跨域不能设置头
         headers: {

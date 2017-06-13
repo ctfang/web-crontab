@@ -1,4 +1,5 @@
 <template>
+    <div>
         <el-table :data="tableData" border style="width: 100%">
         <el-table-column fixed prop="runUser" label="运行用户">
         </el-table-column>
@@ -10,6 +11,7 @@
         <el-row style="text-align:center;margin-top:15px;">
             <router-link to='/index/use_command'><el-button v-on:click='jump'>默认按钮</el-button></router-link>
         </el-row>
+    </div>
 </template>
 <script>
     export default {

@@ -7,13 +7,13 @@
             <el-step title="完成" description=""></el-step>
         </el-steps>
         <div v-if="index == 1">
-            <checkCommand v-on:selectOption='selectOption'></checkCommand>
+            <check-command v-on:selectOption='selectOption'></check-command>
         </div>
         <div v-else-if="index == 2">
-            <use_command  v-on:selectOption='selectOption' ></use_command>
+            <use-command  v-on:selectOption='selectOption' ></use-command>
         </div>
         <div v-else-if="index == 3">
-            <restart_server  v-on:selectOption='selectOption'></restart_server>
+            <restart-server  v-on:selectOption='selectOption'></restart-server>
         </div>
         <div v-else>
             Not A/B/C
@@ -36,10 +36,9 @@
 </template>
 
 <script>
-    import checkCommand from '@/components/check_command';
+    import check_command from '@/components/check_command';
     import use_command from '@/components/use_command';
     import restart_server from '@/components/restart_server';
-    console.log(checkCommand)
   export default {
     data() {
         return {
@@ -52,7 +51,11 @@
             index:1
         }
     },
-
+    components: {
+        'check-command': check_command,
+        'use-command': use_command,
+        'restart-server': restart_server,
+    },
     methods: {
         selectOption(index){
             this.index = index;
