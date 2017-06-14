@@ -1,11 +1,13 @@
 <template>
     <div>
-        <el-steps :space="200" :active="index">
-            <el-step title="检查命令" description=""></el-step>
-            <el-step title="使用命令" description=""></el-step>
-            <el-step title="等待服务器重启" description=""></el-step>
-            <el-step title="完成" description=""></el-step>
-        </el-steps>
+        <el-row style="text-align:center">
+            <el-steps :space="200" :active="index">
+                <el-step title="检查命令" description=""></el-step>
+                <el-step title="使用命令" description=""></el-step>
+                <el-step title="等待服务器重启" description=""></el-step>
+                <el-step title="完成" description=""></el-step>
+            </el-steps>
+        </el-row>
         <div v-if="index == 1">
             <check-command v-on:selectOption='selectOption'></check-command>
         </div>
@@ -16,7 +18,7 @@
             <restart-server  v-on:selectOption='selectOption'></restart-server>
         </div>
         <div v-else>
-            Not A/B/C
+            <complete></complete>
         </div>
         <el-dialog title="确认使用" :visible.sync="dialogFormVisible">
             <el-form :model="form">
@@ -39,6 +41,7 @@
     import check_command from '@/components/check_command';
     import use_command from '@/components/use_command';
     import restart_server from '@/components/restart_server';
+    import complete from '@/components/complete';
   export default {
     data() {
         return {
@@ -55,6 +58,7 @@
         'check-command': check_command,
         'use-command': use_command,
         'restart-server': restart_server,
+        'complete':complete,
     },
     methods: {
         selectOption(index){
@@ -66,7 +70,9 @@
             http.post('/cron/make/release',this.form)
             .then((res)=>{
                 if(res.data.statusCode==10001){
-                    this.index = 4;
+                    setTimeout(()=>{
+                        this.index = 4;
+                    },2000)
                 }
             })
         }, 

@@ -13,7 +13,7 @@
       <el-table-column fixed="right" label="操作" width="180">
         <template scope="scope">
             <el-button type="text" @click="handleDelete(scope.$index,scope.row)"><i class="el-icon-delete" /></el-button>
-            <el-switch v-model="scope.row.statusKey" on-text="开" off-text="关" @change='switchPlan(scope.scope.row)'></el-switch>
+            <el-switch v-model="scope.row.status" on-text="开" off-text="关" @change='switchPlan(scope.row)'></el-switch>
         </template>
       </el-table-column>
     </el-table>
@@ -30,10 +30,12 @@
       switchPlan(row){
         http.post('/plan/edit', {
           name:row.name,
-          status:row.status,
+          status:row.status==0?1:0,
           remark:row.remark,
-        }).then(()=>{
-          
+        }).then((res)=>{
+            if(res.data.statusCode===10000){
+                this[row.statusKeyName] = row.status==0?true:false;
+            }
         })
       },
       handleDelete(index, row) {
@@ -74,10 +76,11 @@
               res.data.arrData.forEach((value,index)=>{
 
                 this['status'+index] = value.status;
-                value['statusKey'] = 'status'+index;
-
+                value['statusKeyName'] = 'status'+index;
               })
+
               this.tableData = res.data.arrData;
+              
             } 
         })
   
@@ -87,8 +90,6 @@
       return {
   
         tableData:[],
-        status1:true,
-        status2:false
   
       }
   

@@ -1,7 +1,7 @@
 <template>
-	<div id="page">
+	<div id="page" style="width:500px;margin:100px auto">
 		<el-row>
-			<el-col :span="24"><div class="top-title">欢迎使用 WEB-CRONTAB</div></el-col>
+			<el-col :span="24" style="margin-bottom:50px"><div class="top-title">WEB-CRONTAB</div></el-col>
 		</el-row>
 
 		<el-form ref="ruleForm" :rules="rules" :model="ruleForm" label-width="80px">

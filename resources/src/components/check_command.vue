@@ -9,7 +9,7 @@
         </el-table-column>
         </el-table>
         <el-row style="text-align:center;margin-top:15px;">
-            <router-link to='/index/use_command'><el-button v-on:click='jump'>默认按钮</el-button></router-link>
+            <el-button v-on:click='jump'>默认按钮</el-button>
         </el-row>
     </div>
 </template>
@@ -23,7 +23,9 @@
         created(){
             http.post('/cron/list')
             .then((res)=>{
-                this.tableData = res.data;
+               if(res.data.statusCode==10001){
+                    this.tableData = res.data;
+                }
             })
         },
         methods:{
