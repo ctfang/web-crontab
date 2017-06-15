@@ -18,27 +18,55 @@
         </template>
       </el-table-column>
     </el-table>
+    <div class="block">
+      <el-pagination
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-size="30"
+        :page-count="pageCount"
+        layout="prev, pager, next"
+        >
+      </el-pagination>
+    </div>
   </div>
 </template>
 
 <script>
   export default {
     created() {
-      http.post('/release/list')
+      http.get('/release/list')
       .then((res)=>{
           if(res.data.statusCode==10001){
-            console.log(res.data.arrData.data.list)
-            this.tableData = res.data.arrData.data.list;
+            let data =  res.data.arrData;
+            this.tableData = data.data.list;
+            this.currentPage = data.first_page;
+            this.pageCount = data.last_page;
           }
       })
   
     },
     data() {
       return {
-        tableData:[]
-  
+        tableData:[],
       }
 
+    },
+    methods:{
+      handleCurrentChange(page){
+        http.get('/release/list',{
+          params:{
+            page:page,
+          }
+        })
+        .then((res)=>{
+           if(res.data.statusCode==10001){
+            let data =  res.data.arrData;
+            this.tableData = data.data.list;
+            this.currentPage = data.first_page;
+            this.pageCount = data.last_page;
+          }         
+        })
+      }
     }
   
   }
