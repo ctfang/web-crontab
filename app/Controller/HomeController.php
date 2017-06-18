@@ -49,8 +49,10 @@ class HomeController
     public function enable()
     {
         if( request()->get('enable',0)==0 ){
+            // 需要启动
             Crontab::setIsRestart(false);
         }else{
+            // 取消或已经启动
             Crontab::setIsRestart(true);
         }
         return Output::success('使设置生效');
@@ -81,6 +83,7 @@ class HomeController
         }
         // 生成版本
         (new CrontabModel())->makeRelease($name,$remark);
+        $this->enable();
         return Output::success('',10001,true);
     }
 

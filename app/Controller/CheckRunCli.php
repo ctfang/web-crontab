@@ -112,10 +112,11 @@ class CheckRunCli
         (new LocalModel())->exList();
     }
 
-
+    /**
+     * 测试命令
+     */
     public function test()
     {
-        $model = new Lists();
-        p($model->getPage('cronRelease',1));
+        file_put_contents(basePath('/storage/test.log'),date('Y--d H:i:s'),FILE_APPEND);
     }
 }
