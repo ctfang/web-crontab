@@ -14,7 +14,7 @@
       <li><a href="https://github.com/selden1992/web-crontab" target="_blank">GitHub</a></li>
       <li><a href="http://vuex.vuejs.org/" target="_blank">Email</a></li>
       <li><a href="https://github.com/selden1992/web-crontab/blob/master/README.md" target="_blank">Docs</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">Blog</a></li>
+      <li><a href="http://wp.ctfang.com" target="_blank">Blog</a></li>
     </ul>
   </div>
 </template>

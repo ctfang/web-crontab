@@ -24,7 +24,7 @@
             http.post('/cron/list')
             .then((res)=>{
                if(res.data.statusCode==10001){
-                    this.tableData = res.data;
+                    this.tableData = res.data.arrData;
                 }
             })
         },
