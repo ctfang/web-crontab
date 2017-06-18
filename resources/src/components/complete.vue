@@ -4,10 +4,10 @@
         <el-row style="margin-top:30px;text-align:center">
             <el-row>
                     <el-col :span='12'>
-                        <el-button>2017-05-05</el-button>
+                        <el-button>{{this.formdate(this.beforeTime)}}</el-button>
                     </el-col>
                     <el-col :span='12'>
-                        <el-button>2017-05-06</el-button>
+                        <el-button>{{this.formdate(this.lastTime)}}</el-button>
                     </el-col>
             </el-row>
             <h3>启动完成</h3>
@@ -18,9 +18,10 @@
 
 <script>
   export default {
+    props:['beforeTime','lastTime'],
     data() {
         return {
- 
+            
         }
     },
     created(){
@@ -30,7 +31,16 @@
         })
     },
     methods: {
-
+        formdate(time){
+            console.log(typeof time)
+            if(typeof time=='string'||typeof time=='number'){
+                time = new Date(time*1000);
+                return time.getFullYear()+'-'+(time.getMonth()+1)+'-'+time.getDate()+' '+time.getHours()+':'+time.getMinutes()+':'+time.getSeconds();
+            }else{
+                return '';
+            }
+            
+        }
     }
   }
 </script>
