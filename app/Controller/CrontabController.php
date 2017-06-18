@@ -31,7 +31,7 @@ class CrontabController
 
             }
         }
-        return $newList;
+        return Output::success('命令信息','10001',$newList);
     }
 
     /**
