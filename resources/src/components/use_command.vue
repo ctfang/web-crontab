@@ -9,7 +9,7 @@
             </el-table-column>
         </el-table>
         <el-row style="text-align:center;margin-top:15px;">
-            <el-button >确认按钮</el-button>
+            <el-button v-on:click='dialog'>确认按钮</el-button>
         </el-row>
     </div>
 </template>
@@ -34,6 +34,9 @@
         methods:{
             jump(){
                 this.$emit('selectOption', 3 );
+            },
+            dialog(){
+                this.$emit('selectOption', 2 );
             }
         }
     }
