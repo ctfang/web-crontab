@@ -81,7 +81,10 @@
 
               this.tableData = res.data.arrData;
               
-            } 
+            }
+            if(res.data.statusCode==40002){
+                  this.$router.push('/login');
+            }
         })
   
     },

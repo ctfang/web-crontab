@@ -42,6 +42,9 @@
             this.currentPage = data.first_page;
             this.pageCount = data.last_page;
           }
+          if(res.data.statusCode==40002){
+                this.$router.push('/login');
+          }
       })
   
     },
@@ -64,7 +67,10 @@
             this.tableData = data.data.list;
             this.currentPage = data.first_page;
             this.pageCount = data.last_page;
-          }         
+          }
+          if(res.data.statusCode==40002){
+                this.$router.push('/login');
+          }        
         })
       }
     }

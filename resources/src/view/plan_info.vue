@@ -84,6 +84,9 @@
           if(res.data.statusCode==10000){
             this.tableData.splice(index,1);
           }
+          if(res.data.statusCode==40002){
+                this.$router.push('/login');
+          }
         })
       }
     },

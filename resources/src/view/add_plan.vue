@@ -25,11 +25,10 @@
     },
     methods: {
       onSubmit(){
-	  console.log(this.form)
         http.post('/plan/store',this.form)
-		.then((result)=>{
-			this.$router.push('/index/plan_list');
-		})
+				.then((result)=>{
+					this.$router.push('/index/plan_list');
+				})
       }
     }
   }

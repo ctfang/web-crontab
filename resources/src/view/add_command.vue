@@ -61,6 +61,9 @@
 					if(res.data.statusCode==10000){
 						this.$router.push({name:'plan_info',params:{name:this.$route.params.name}});
 					}
+					if(res.data.statusCode==40002){
+								this.$router.push('/login');
+					}
 				})
       }
     }

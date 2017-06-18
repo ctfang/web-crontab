@@ -74,6 +74,9 @@
                         this.index = 4;
                     },2000)
                 }
+                if(res.data.statusCode==40002){
+                     this.$router.push('/login');
+                }
             })
         }, 
 

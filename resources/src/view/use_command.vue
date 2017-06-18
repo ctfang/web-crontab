@@ -47,6 +47,9 @@
                 if(res.data.statusCode==10001){
                     this.$router.push('/index/restart_server');
                 }
+                if(res.data.statusCode==40002){
+                     this.$router.push('/login');
+                }
             })
         },      
     }
