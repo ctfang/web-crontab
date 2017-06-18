@@ -64,6 +64,7 @@
         selectOption(index){
             this.index = index;
             this.dialogFormVisible = true;
+            console.log('open dialog......')
         },
         onSubmit(){
             this.index = 3;

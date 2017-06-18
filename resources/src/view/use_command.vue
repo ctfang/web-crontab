@@ -15,7 +15,7 @@
         </el-table-column>
         </el-table>
         <el-row style="text-align:center;margin-top:15px;">
-            <el-button @click="dialogFormVisible = true">确认按钮</el-button>
+            <el-button @click="openDialog">确认按钮</el-button>
         </el-row>
 
     </div>
@@ -41,6 +41,10 @@
         })
     },
     methods: {
+        openDialog(){
+            console.log('open dialog');
+            this.dialogFormVisible = true;
+        },
          onSubmit(){
             http.post('/cron/make/release',this.form)
             .then((res)=>{
