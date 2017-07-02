@@ -32,7 +32,6 @@ class Files
                 return true;
             }
         }
-        die('没有权限写文件');
     }
 
     /**
