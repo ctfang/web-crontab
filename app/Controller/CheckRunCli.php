@@ -119,13 +119,12 @@ class CheckRunCli
     public function initDir()
     {
         $dirList = [
-            basePath('/storage/'),
-            basePath('/storage/crontabs/'),
-            basePath('/storage/data/'),
-            basePath('/storage/log/'),
-            basePath('/storage/release/'),
+            basePath('storage/'),
+            basePath('storage/crontabs/'),
+            basePath('storage/data/'),
+            basePath('storage/log/'),
+            basePath('storage/release/'),
         ];
-        p($dirList);die();
         foreach ($dirList as $dir){
             if( !is_dir($dir) ){
                 mkdir($dir,0755,true);
@@ -139,6 +138,6 @@ class CheckRunCli
      */
     public function test()
     {
-        file_put_contents(basePath('/storage/test.log'),date('Y--d H:i:s'),FILE_APPEND);
+        file_put_contents(basePath('storage/test.log'),date('Y--d H:i:s'),FILE_APPEND);
     }
 }
