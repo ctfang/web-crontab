@@ -25,10 +25,10 @@ class Cache
         $path            = Config::get('storage') . 'data/' . $key;
         if (!is_dir(dirname($path))) {
             mkdir(dirname($path), 0755, true);
-            chmod(dirname($path),0777);
+            @chmod(dirname($path),0777);
         }
-        if( $path && file_put_contents($path, $string) ){
-            chmod($path,0777);
+        if( file_put_contents($path, $string) ){
+            @chmod($path,0777);
         }
     }
 
