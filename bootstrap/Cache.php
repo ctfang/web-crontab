@@ -22,7 +22,7 @@ class Cache
         $data['data']    = $value;
         $data['expired'] = $expired ? $expired + time() : false;
         $string          = serialize($data);
-        $path            = Config::get('storage') . '/data/' . $key;
+        $path            = Config::get('storage') . 'data/' . $key;
         if (!is_dir(dirname($path))) {
             chmod(dirname($path),0777);
             mkdir(dirname($path), 0755, true);
@@ -38,7 +38,7 @@ class Cache
      */
     public static function get($key)
     {
-        $path     = Config::get('storage').'/data/'.$key;
+        $path     = Config::get('storage').'data/'.$key;
         if(!file_exists($path)){
             return [];
         }
