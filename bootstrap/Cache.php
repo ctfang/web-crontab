@@ -27,7 +27,7 @@ class Cache
             mkdir(dirname($path), 0755, true);
             chmod(dirname($path),0777);
         }
-        if( file_put_contents($path, $string) ){
+        if( $path && file_put_contents($path, $string) ){
             chmod($path,0777);
         }
     }
