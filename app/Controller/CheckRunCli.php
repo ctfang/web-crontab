@@ -125,8 +125,11 @@ class CheckRunCli
             basePath('/storage/log/'),
             basePath('/storage/release/'),
         ];
+        p($dirList);die();
         foreach ($dirList as $dir){
-            mkdir($dir,0755,true);
+            if( !is_dir($dir) ){
+                mkdir($dir,0755,true);
+            }
             chmod($dir,0777);
         }
     }
