@@ -24,7 +24,9 @@ class Cache
         $string          = serialize($data);
         $path            = Config::get('storage') . '/data/' . $key;
         if (!is_dir(dirname($path))) {
+            chmod(dirname($path),0777);
             mkdir(dirname($path), 0755, true);
+            chmod($path,0777);
         }
 
         file_put_contents($path, $string);
