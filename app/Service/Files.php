@@ -26,9 +26,7 @@ class Files
     {
         if( !is_dir(dirname($path)) ){
             if( mkdir(dirname($path),0755,true) ){
-                chmod(dirname($path),0777);
                 file_put_contents($path,$string, LOCK_EX);
-                chmod($path,0777);
                 return true;
             }
         }
