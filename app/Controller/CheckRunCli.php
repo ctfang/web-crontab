@@ -43,6 +43,7 @@ class CheckRunCli
             echo "sorry,cmd exists";
             die("\n");
         }
+        $this->initDir();
         $cronModel->initRelease('接入系统前的备份','接入系统前的备份');
         $cronModel->insertCheck();
         echo "create check cmd\n";
@@ -110,6 +111,24 @@ class CheckRunCli
     public function export()
     {
         (new LocalModel())->exList();
+    }
+
+    /**
+     * 初始化目录
+     */
+    public function initDir()
+    {
+        $dirList = [
+            basePath('/storage/'),
+            basePath('/storage/crontabs/'),
+            basePath('/storage/data/'),
+            basePath('/storage/log/'),
+            basePath('/storage/release/'),
+        ];
+        foreach ($dirList as $dir){
+            mkdir($dir,0755,true);
+            chmod($dir,0777);
+        }
     }
 
     /**
