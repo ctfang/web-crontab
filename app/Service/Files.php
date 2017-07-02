@@ -25,9 +25,11 @@ class Files
     public function put($path,$string)
     {
         if( !is_dir(dirname($path)) ){
-            mkdir(dirname($path),0755,true);
+            if( mkdir(dirname($path),0777,true) ){
+                return file_put_contents($path,$string, LOCK_EX);
+            }
         }
-        return file_put_contents($path,$string, LOCK_EX);
+        die('没有权限写文件');
     }
 
     /**
