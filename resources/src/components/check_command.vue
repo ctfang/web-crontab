@@ -33,7 +33,11 @@
         },
         methods:{
             jump(){
-                this.$emit('selectOption', 2 );
+                http.post('/cron/restart/info')
+                .then((res)=>{
+                    this.$emit('selectOption', 2 ,true,res.data.arrData);
+                })
+                
             }
         }
     }

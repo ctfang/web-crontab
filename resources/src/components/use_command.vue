@@ -32,11 +32,8 @@
             })
         },
         methods:{
-            jump(){
-                this.$emit('selectOption', 3 );
-            },
             dialog(){
-                this.$emit('selectOption', 2 );
+                this.$emit('selectOption', 2,false );
             }
         }
     }

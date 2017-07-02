@@ -2,23 +2,23 @@
     <div>
         <el-row style="text-align:center">
             <el-steps :space="200" :active="index">
-                <el-step title="检查命令" description=""></el-step>
-                <el-step title="使用命令" description=""></el-step>
-                <el-step title="等待服务器重启" description=""></el-step>
-                <el-step title="完成" description=""></el-step>
+                <el-step title="检查命令" ></el-step>
+                <el-step title="使用命令" ></el-step>
+                <el-step title="等待服务器重启" ></el-step>
+                <el-step title="完成" ></el-step>
             </el-steps>
         </el-row>
         <div v-if="index == 1">
-            <check-command v-on:selectOption='selectOption'></check-command>
+            <check-command v-on:selectOption='selectOption1'></check-command>
         </div>
         <div v-else-if="index == 2">
-            <use-command  v-on:selectOption='selectOption' ></use-command>
+            <use-command  v-on:selectOption='selectOption2' ></use-command>
         </div>
         <div v-else-if="index == 3">
-            <restart-server  v-on:selectOption='selectOption'></restart-server>
+            <restart-server  v-on:selectOption='selectOption3' :beforeId='beforeId' :beforeTime='beforeTime'></restart-server>
         </div>
         <div v-else>
-            <complete></complete>
+            <complete :beforeTime='beforeTime' :lastTime='lastTime'></complete>
         </div>
         <el-dialog title="确认使用" :visible.sync="dialogFormVisible">
             <el-form :model="form">
@@ -51,7 +51,8 @@
             },
             tableData:[],
             dialogFormVisible: false,
-            index:1
+            index:1,
+            lastId:0,
         }
     },
     components: {
@@ -61,19 +62,26 @@
         'complete':complete,
     },
     methods: {
-        selectOption(index){
+        selectOption1(index,dialogFormVisible=true,data){
+            this.selectOption2(index,dialogFormVisible);
+            this.beforeId = data.last_id;
+            this.beforeTime = data.last_check;
+        },
+        selectOption2(index,dialogFormVisible=true){
             this.index = index;
-            this.dialogFormVisible = true;
-            console.log('open dialog......')
+            this.dialogFormVisible = dialogFormVisible;
+
+        },
+        selectOption3(index,dialogFormVisible=true,data){
+            this.selectOption2(index,dialogFormVisible);
+            console.log(data.last_check,data,123)
+            this.lastTime = data.last_check;
         },
         onSubmit(){
-            this.index = 3;
             http.post('/cron/make/release',this.form)
             .then((res)=>{
                 if(res.data.statusCode==10001){
-                    setTimeout(()=>{
-                        this.index = 4;
-                    },2000)
+                        this.index = 3;
                 }
                 if(res.data.statusCode==40002){
                      this.$router.push('/login');
