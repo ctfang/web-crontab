@@ -14,7 +14,7 @@
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="180">
         <template scope="scope">
-            <el-button type="text" >回滚</el-button>
+            <el-button type="text" @click='back()'>回滚</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -33,6 +33,19 @@
 
 <script>
   export default {
+    method(){
+      back(){
+      http.get('/rollback/release')
+      .then((res)=>{
+          if(res.data.statusCode==10001){
+
+          }
+          if(res.data.statusCode==40002){
+                
+          }
+      })       
+      }
+    },
     created() {
       http.get('/release/list')
       .then((res)=>{
