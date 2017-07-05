@@ -1,13 +1,6 @@
 <template>
 	<div id="page" style="width:500px;margin:100px auto">
-		<el-row>
-			<el-col :span="24" style="margin-bottom:50px"><div class="top-title">WEB-CRONTAB</div></el-col>
-		</el-row>
-
 		<el-form ref="ruleForm" :rules="rules" :model="ruleForm" label-width="80px">
-			<el-form-item label="用户名称" prop="username">
-				<el-input v-model="ruleForm.username"></el-input>
-			</el-form-item>
 			<el-form-item label="密码" prop="password">
 				<el-input v-model="ruleForm.password"></el-input>
 			</el-form-item>
@@ -15,7 +8,7 @@
 				<el-input v-model="ruleForm.check_password"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
+				<el-button type="primary" @click="submitForm('ruleForm')">保存修改</el-button>
 			</el-form-item>
 		</el-form>
 </div>
@@ -44,10 +37,6 @@
 				},
 				dialogVisible: false,
 				rules: {
-				  username: [
-					{ required: true, message: '请输入用户名', trigger: 'blur' },
-					{ min: 3, max: 20, message: '长度在 3 到 20 个字符', trigger: 'blur' },
-				  ],
 				  password: [
 					{ required: true, message: '请输入密码', trigger: 'blur' },
 					{ min: 4, max: 20, message: '长度在 4 到 20 个字符', trigger: 'blur' }

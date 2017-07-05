@@ -14,9 +14,8 @@ import not_found from '@/view/not_found'
 import permission from '@/view/permission'
 import edit_command from '@/view/edit_command'
 import check_command from '@/view/check_command'
-import use_command from '@/view/use_command'
 import enabled_history from '@/view/enabled_history'
-import restart_server from '@/view/restart_server'
+import change_password from '@/view/change_password'
 
 Vue.use(Router)
 
@@ -61,11 +60,6 @@ export default new Router({
                     component: edit_command,
                 },
                 {
-                    path: 'restart_server',
-                    name: 'restart_server',
-                    component: restart_server,
-                },
-                {
                     path: 'enabled_history',
                     name: 'enabled_history',
                     component: enabled_history,
@@ -76,9 +70,9 @@ export default new Router({
                     component: check_command,
                 },
                 {
-                    path: 'use_command',
-                    name: 'use_command',
-                    component: use_command,
+                    path:'change_password',
+                    name:'change_password',
+                    component:change_password,
                 }
             ]
         },

@@ -33,17 +33,17 @@
 
 <script>
   export default {
-    method(){
+    method:{
       back(){
-      http.get('/rollback/release')
-      .then((res)=>{
-          if(res.data.statusCode==10001){
+        http.get('/rollback/release')
+        .then((res)=>{
+            if(res.data.statusCode==10001){
 
-          }
-          if(res.data.statusCode==40002){
-                
-          }
-      })       
+            }
+            if(res.data.statusCode==40002){
+                  
+            }
+        })       
       }
     },
     created() {
