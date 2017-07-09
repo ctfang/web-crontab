@@ -63,12 +63,12 @@ class HomeController
      */
     public function is_restart()
     {
-        if (Crontab::getIsRestart() ){
+        if ( Crontab::getIsRestart() ){
             // 启动已经生效
-            return Output::success('',10001,false);
+            return Output::success('还没有完成重启',10001,true);
         }
+        return Output::success('启动已经生效',10001,false);
         // 还没有完成重启
-        return Output::success('',10001,true);
     }
 
     /**

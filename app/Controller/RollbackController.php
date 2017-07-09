@@ -26,7 +26,7 @@ class RollbackController
         $files->delFiles(basePath('storage/crontabs/'));
         $localPath = basePath('storage/crontabs/');
         $files->copyDir($path, $localPath);
-        Crontab::setIsRestart(false);
+        Crontab::setIsRestart();
         $lists = new Lists();
         $data = $lists->getInfo('cronRelease',request()->post('id'));
         $data['status'] = 1;
