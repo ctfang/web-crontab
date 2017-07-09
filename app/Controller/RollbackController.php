@@ -13,6 +13,7 @@ use App\Service\Crontab;
 use App\Service\Files;
 use App\Service\Lists;
 use App\Service\Output;
+use system\Cache;
 
 class RollbackController
 {
@@ -27,6 +28,7 @@ class RollbackController
         $localPath = basePath('storage/crontabs/');
         $files->copyDir($path, $localPath);
         Crontab::setIsRestart();
+        Cache::set('is_rollback',true);
         $lists = new Lists();
         $data = $lists->getInfo('cronRelease',request()->post('id'));
         $data['status'] = 1;

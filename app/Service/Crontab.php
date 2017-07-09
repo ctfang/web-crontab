@@ -37,13 +37,19 @@ class Crontab
         $files     = new Files();
         $CrontabModel = new CrontabModel();
         $list      = $CrontabModel->getUseList();// 整合数据
-        // 生成预配置文件
-        foreach ($list as $user => $cmd) {
-            $str  = implode("\n", $cmd) . "\n ";
-            $path = $localPath . $user;
-            $str  = $files->replace($files->get($path), Config::get('command.set_start'), Config::get('command.set_end'), $str);
-            $files->put($path, $str);
+        if( Cache::get('is_rollback')==true ){
+            // 如果是回滚，不用方案写入
+            Cache::set('is_rollback',false);
+        }else{
+            // 生成预配置文件
+            foreach ($list as $user => $cmd) {
+                $str  = implode("\n", $cmd) . "\n ";
+                $path = $localPath . $user;
+                $str  = $files->replace($files->get($path), Config::get('command.set_start'), Config::get('command.set_end'), $str);
+                $files->put($path, $str);
+            }
         }
+
         // 写入系统配置文件
         $userLst = $files->getFiles($localPath);
         foreach ($userLst as $path) {
