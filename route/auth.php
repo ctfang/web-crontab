@@ -57,4 +57,6 @@ return [
 
     // 修改密码
     '/user/edit_password'=>'UserController@editPassword',
+    // 版本后退
+    '/rollback/release'=>'RollbackController@rollback',
 ];
