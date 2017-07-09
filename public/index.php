@@ -5,8 +5,8 @@
  * Date: 2017/3/25
  * Time: 下午7:44
  */
-error_reporting(E_ALL);
-ini_set('display_errors',1);
+//error_reporting(E_ALL);
+//ini_set('display_errors',1);
 ini_set('date.timezone','Asia/Shanghai');
 
 require __DIR__.'/../vendor/autoload.php';
