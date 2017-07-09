@@ -14,5 +14,5 @@ return [
     /**
      * 密码，password_hash('admin',PASSWORD_DEFAULT);
      */
-    'password'=>'$2y$10$X4V6HJT9q1IvFg97ePTGY.ka1AOnADB1aFCTVGH6echD98qAPnECS',
+    'password'=>'$2y$10$2ot8BvGA3T7z.hkIerJqJu2Fo9pPOcKmwUcIDlOhCm4xEyLdJ8he2',
 ];
