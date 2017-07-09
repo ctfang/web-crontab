@@ -56,10 +56,9 @@
 				var qs = require('qs');
 				this.$refs[formName].validate((valid) => {
 				  if (valid) {
-						http.post('/login', {
-							username: formData.username,
+						http.post('/user/edit_password', {
+                            check_password: formData.check_password,
 							password: formData.password,
-							delivery: formData.delivery
 						})
 						.then( (response) =>{
 							console.log(response)

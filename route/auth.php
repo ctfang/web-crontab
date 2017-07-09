@@ -54,4 +54,7 @@ return [
 
     // 获取版本历史
     '/release/list'=>'HomeController@getReleaseList',
+
+    // 修改密码
+    '/user/edit_password'=>'UserController@editPassword',
 ];
