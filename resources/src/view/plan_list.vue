@@ -39,20 +39,23 @@
         })
       },
       handleDelete(index, row) {
-        http.get('/plan/destroy', {
-  
-            params: {
-  
-              'name': row.name
-  
-            }
+        if( confirm("确认删除该方案？") ){
+          http.get('/plan/destroy', {
+    
+              params: {
+    
+                'name': row.name
+    
+              }
 
-          })
-          .then((res) => {
-            if( res.data.statusCode==10000 ){
-              delete this.tableData.splice(index,1);
-            }
-          })
+            })
+            .then((res) => {
+              if( res.data.statusCode==10000 ){
+                delete this.tableData.splice(index,1);
+              }
+            })     
+        }
+
       }
 
     },

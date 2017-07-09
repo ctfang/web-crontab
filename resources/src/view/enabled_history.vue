@@ -1,5 +1,7 @@
 <template>
   <div>
+        <div style="position:absolute;top:100px;height:80px;width:80px;left:50%;margin-left:-40px;" v-loading="loading2"
+    element-loading-text="重启中"></div>
     <el-table :data="tableData" border style="width: 100%">
       <el-table-column fixed prop="date" label="日期"> 
       </el-table-column>
@@ -14,7 +16,7 @@
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="180">
         <template scope="scope">
-            <el-button type="text" @click='back()'>回滚</el-button>
+            <el-button type="text" @click="backFun(scope.row)" >回滚</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -33,19 +35,6 @@
 
 <script>
   export default {
-    method:{
-      back(){
-        http.get('/rollback/release')
-        .then((res)=>{
-            if(res.data.statusCode==10001){
-
-            }
-            if(res.data.statusCode==40002){
-                  
-            }
-        })       
-      }
-    },
     created() {
       http.get('/release/list')
       .then((res)=>{
@@ -64,6 +53,8 @@
     data() {
       return {
         tableData:[],
+        loading2:false,
+        time:0
       }
 
     },
@@ -84,6 +75,33 @@
           if(res.data.statusCode==40002){
                 this.$router.push('/login');
           }        
+        })
+      },
+      backFun(row){
+        console.log(row)
+        this.loading2=true;
+        http.post('/rollback/release',{
+          'id':row.id,
+          'path':row.path
+        })
+        .then((res)=>{
+            if(this.time>=60){
+                this.loading2=false;
+                this.$message({type: 'warning',showClose: true,'message':'请求超时，请刷新页面！'});
+                return false;
+            }
+            if(res.data.arrData.id==row.id){
+                let timer=setTimeout(()=>{
+                    this.backfun();
+                    clearTimeout(timer);
+                    this.time++;
+                    timer=null;
+                },2000)
+            }else{
+                this.loading2=false;
+                this.$message({type: 'warning',showClose: true,'message':'回滚成功！'});
+            }
+
         })
       }
     }

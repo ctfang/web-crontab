@@ -61,7 +61,7 @@
 							password: formData.password,
 						})
 						.then( (response) =>{
-							if(response.data.statusCode==10001){
+							if(response.data.statusCode==10000){
 								VueCookie.set('Authorization', response.data.arrData.Authorization,24*3600);						
 								this.$router.push('/index');
 							}else{

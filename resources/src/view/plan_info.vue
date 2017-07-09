@@ -76,18 +76,21 @@
 
       },
       handleDelete(index,row){
-        http.post('/cron/destroy',{
-          plan_name:this.$route.params.name,
-          id:row.id,
-        })
-        .then((res)=>{
-          if(res.data.statusCode==10000){
-            this.tableData.splice(index,1);
-          }
-          if(res.data.statusCode==40002){
-                this.$router.push('/login');
-          }
-        })
+        if( confirm('确认删除该命令？') ){
+          http.post('/cron/destroy',{
+            plan_name:this.$route.params.name,
+            id:row.id,
+          })
+          .then((res)=>{
+            if(res.data.statusCode==10000){
+              this.tableData.splice(index,1);
+            }
+            if(res.data.statusCode==40002){
+                  this.$router.push('/login');
+            }
+          })
+        }
+
       }
     },
     
