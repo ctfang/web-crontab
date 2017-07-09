@@ -2,10 +2,10 @@
 	<div id="page" style="width:500px;margin:100px auto">
 		<el-form ref="ruleForm" :rules="rules" :model="ruleForm" label-width="80px">
 			<el-form-item label="密码" prop="password">
-				<el-input v-model="ruleForm.password"></el-input>
+				<el-input type="password" v-model="ruleForm.password"></el-input>
 			</el-form-item>
 			<el-form-item label="确认密码" prop="check_password">
-				<el-input v-model="ruleForm.check_password"></el-input>
+				<el-input type="password" v-model="ruleForm.check_password"></el-input>
 			</el-form-item>
 			<el-form-item>
 				<el-button type="primary" @click="submitForm('ruleForm')">保存修改</el-button>
