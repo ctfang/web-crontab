@@ -20,11 +20,12 @@ class RollbackController
      */
     public function rollback()
     {
-        $path = request()->post('path');
-        $files     = new Files();
+        $path  = request()->post('path');
+        $files = new Files();
+        $files->delFiles(basePath('storage/crontabs/'));
         $localPath = basePath('storage/crontabs/');
-        $files->copyDir($path,$localPath);
+        $files->copyDir($path, $localPath);
         Crontab::setIsRestart(false);
-        return Output::success('',10001,true);
+        return Output::success('', 10001, true);
     }
 }
