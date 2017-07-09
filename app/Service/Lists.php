@@ -119,10 +119,16 @@ class Lists
     {
         $page      = ceil($id / Lists::$_max);
         $list      = $this->getPage($listName, $page);
-        $list[$id] = array_merge($list[$id], $arr);
-
+        $list['data']['list'][$id-1] = array_merge($list['data']['list'][$id-1], $arr);
         $all         = Cache::get($this->getPath($listName, $page));
-        $all['list'] = $list;
+        $all['list'] = $list['data']['list'];
         Cache::set($this->getPath($listName, $page), $all);
+    }
+
+    public function getInfo($listName,$id)
+    {
+        $page      = ceil($id / Lists::$_max);
+        $list      = $this->getPage($listName, $page);
+        return $list['data']['list'][$id-1];
     }
 }

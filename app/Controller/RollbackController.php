@@ -27,8 +27,12 @@ class RollbackController
         $localPath = basePath('storage/crontabs/');
         $files->copyDir($path, $localPath);
         Crontab::setIsRestart(false);
-        (new Lists())->edit('cronRelease',request()->post('id'),['status'=>1]);
-
+        $lists = new Lists();
+        $data = $lists->getInfo('cronRelease',request()->post('id'));
+        $data['status'] = 1;
+        $data['date'] = date('Y-m-d H:i:s');
+        $data['remark'] = '回滚操作';
+        $lists->put('cronRelease',$data);
         return Output::success('', 10001, true);
     }
 }
