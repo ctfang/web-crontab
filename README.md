@@ -31,7 +31,13 @@ php cron check
 项目所有命令保存在 config/command.php 下，
 
 系统命令不兼容时、如果发现项目不能运行，查看该文件修改。
+```php
+// 重启命令
+'crontab_restart'=>'service cron restart',
 
+// cron命令目录
+'cron_path'=>'/usr/bin/crontab',
+```
 最好提bug给我们，我们会尽快新增适配不同linux不同版本的差异
 
 # 项目原理
