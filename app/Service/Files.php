@@ -77,11 +77,14 @@ class Files
             return [];
         }
         $dir  = scandir($path);
+        if( substr($path,-1)!='/' ){
+            $path = $path.'/';
+        }
         if( empty($dir) ) return [];
         $return = [];
         foreach ($dir as &$name){
             if( !in_array($name,['.','..']) ){
-                $return[$name] = $path.'/'.$name;
+                $return[$name] = $path.$name;
             }
         }
         return $return;
