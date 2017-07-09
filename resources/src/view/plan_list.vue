@@ -30,7 +30,7 @@
       switchPlan(row){
         http.post('/plan/edit', {
           name:row.name,
-          status:row.status==0?1:0,
+          status:row.status==0?0:1,
           remark:row.remark,
         }).then((res)=>{
             if(res.data.statusCode===10000){
