@@ -11,6 +11,7 @@ namespace App\Controller;
 
 use App\Service\Crontab;
 use App\Service\Files;
+use App\Service\Output;
 
 class RollbackController
 {
