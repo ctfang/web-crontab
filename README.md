@@ -19,6 +19,13 @@ php cron init命令会生成当前系统的命令备份，和安装一个crontab
 
 新安装的账号密码都是：admin
 
+# 手动启动命令
+如果关闭了默认安装 方案，必须手动执行下面命令才可以生效命令
+```php
+cd web-crontab
+php cron check
+```
+
 # 修改命令
 
 项目所有命令保存在 config/command.php 下，
