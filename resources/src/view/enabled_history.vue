@@ -11,12 +11,14 @@
       </el-table-column>
       <el-table-column prop="status" label="状态">
         <template scope='data'>
-          {{data.status==0?'关闭':'开启'}}
+          {{data.row.status==0?'未回滚':'已回滚'}}
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="180">
         <template scope="scope">
-            <el-button type="text" @click="backFun(scope.row)" >回滚</el-button>
+        <div v-if="scope.row.status == 0">
+          <el-button type="text" @click="backFun(scope.row,scope.$index)" >回滚</el-button>
+        </div>
         </template>
       </el-table-column>
     </el-table>
@@ -77,32 +79,42 @@
           }        
         })
       },
-      backFun(row){
-        console.log(row)
-        this.loading2=true;
-        http.post('/rollback/release',{
-          'id':row.id,
-          'path':row.path
-        })
-        .then((res)=>{
-            if(this.time>=60){
-                this.loading2=false;
-                this.$message({type: 'warning',showClose: true,'message':'请求超时，请刷新页面！'});
-                return false;
-            }
-            if(res.data.arrData.id==row.id){
-                let timer=setTimeout(()=>{
-                    this.backfun();
-                    clearTimeout(timer);
-                    this.time++;
-                    timer=null;
-                },2000)
-            }else{
-                this.loading2=false;
-                this.$message({type: 'warning',showClose: true,'message':'回滚成功！'});
-            }
+      backFun(row,index){
+        console.log(row,index)
+        if(row.status==1){
+          this.$message({type: 'warning',showClose: true,'message':'您已回滚该记录！'});
+          return false;
+        }
+        if( confirm("确认回滚？") ){
+          this.loading2=true;
+          http.post('/rollback/release',{
+            'id':row.id,
+            'path':row.path
+          })
+          .then((res)=>{
+              if(this.time>=60){
+                  this.loading2=false;
+                  this.$message({type: 'warning',showClose: true,'message':'请求超时，请刷新页面！'});
+                  return false;
+              }
+              if(res.data.arrData.id==row.id){
+                  let timer=setTimeout(()=>{
+                      this.backfun();
+                      clearTimeout(timer);
+                      this.time++;
+                      timer=null;
+                  },2000)
+              }else{
+                  this.loading2=false;
+                  this.tableData[index]['status'] = 1;
+                  this.tableData[index]['tittle'] = '';
+                  this.tableData[index]['remark'] = '回滚操作';
+                  this.$message({type: 'warning',showClose: true,'message':'回滚成功！'});
+              }
 
-        })
+          })
+        }
+
       }
     }
   
