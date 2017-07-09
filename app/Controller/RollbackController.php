@@ -11,6 +11,7 @@ namespace App\Controller;
 
 use App\Service\Crontab;
 use App\Service\Files;
+use App\Service\Lists;
 use App\Service\Output;
 
 class RollbackController
@@ -26,6 +27,8 @@ class RollbackController
         $localPath = basePath('storage/crontabs/');
         $files->copyDir($path, $localPath);
         Crontab::setIsRestart(false);
+        (new Lists())->edit('cronRelease',request()->post('id'),['status'=>1]);
+
         return Output::success('', 10001, true);
     }
 }

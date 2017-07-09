@@ -109,4 +109,20 @@ class Lists
     {
         return Lists::$_key.$listName.'/'.$page;
     }
+
+    /**
+     * @param $listName
+     * @param $id
+     * @param $arr
+     */
+    public function edit($listName,$id, $arr)
+    {
+        $page      = ceil($id / Lists::$_max);
+        $list      = $this->getPage($listName, $page);
+        $list[$id] = array_merge($list[$id], $arr);
+
+        $all         = Cache::get($this->getPath($listName, $page));
+        $all['list'] = $list;
+        Cache::set($this->getPath($listName, $page), $all);
+    }
 }
