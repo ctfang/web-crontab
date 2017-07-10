@@ -9,7 +9,7 @@
 				<el-input v-model="ruleForm.username"></el-input>
 			</el-form-item>
 			<el-form-item label="密码" prop="password">
-				<el-input v-model="ruleForm.password"></el-input>
+				<el-input type="password" v-model="ruleForm.password"></el-input>
 			</el-form-item>
 			<el-form-item label="记住密码" prop="delivery">
 				<el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
