@@ -1,0 +1,41 @@
+{
+  "name": "ctfang/universe",
+  "description": "The Swoole Framework.",
+  "keywords": ["framework", "universe","swoole","phalcon", "laravel","php"],
+  "license": "MIT",
+  "type": "project",
+  "authors": [
+    {
+      "name": "明月有色",
+      "email": "2206582181@qq.com"
+    }
+  ],
+  "autoload":{
+    "psr-4": {
+      "App\\":"app/",
+      "Universe\\":"universe/"
+    },
+    "files":[
+      "universe/helpers.php"
+    ]
+  },
+  "require": {
+    "vlucas/phpdotenv": "^2.4",
+    "symfony/var-dumper": "^3.3",
+    "symfony/console": "~3",
+    "nikic/fast-route": "^1.2",
+    "monolog/monolog": "~1.12",
+    "filp/whoops": "^2.1.4",
+    "illuminate/database":"*",
+    "illuminate/pagination":"*",
+    "illuminate/events":"*",
+    "symfony/finder":"*",
+    "robmorgan/phinx": "^0.9.2",
+    "symfony/cache": "*",
+    "illuminate/session": "*",
+    "philo/laravel-blade": "3.*"
+  },
+  "require-dev": {
+    "eaglewu/swoole-ide-helper": "dev-master"
+  }
+}
