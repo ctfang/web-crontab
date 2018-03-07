@@ -985,16 +985,16 @@
         },
         {
             "name": "psr/simple-cache",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/simple-cache.git",
-                "reference": "753fa598e8f3b9966c886fe13f370baa45ef0e24"
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/php-fig/simple-cache/753fa598e8f3b9966c886fe13f370baa45ef0e24.zip",
-                "reference": "753fa598e8f3b9966c886fe13f370baa45ef0e24",
+                "url": "https://files.phpcomposer.com/files/php-fig/simple-cache/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b.zip",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
                 "shasum": ""
             },
             "require": {
@@ -1029,7 +1029,7 @@
                 "psr-16",
                 "simple-cache"
             ],
-            "time": "2017-01-02T13:31:39+00:00"
+            "time": "2017-10-23T01:57:42+00:00"
         },
         {
             "name": "robmorgan/phinx",
@@ -1104,7 +1104,7 @@
         },
         {
             "name": "symfony/cache",
-            "version": "v3.4.5",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
@@ -1174,7 +1174,7 @@
         },
         {
             "name": "symfony/config",
-            "version": "v3.4.5",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
@@ -1237,7 +1237,7 @@
         },
         {
             "name": "symfony/console",
-            "version": "v3.4.5",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
@@ -1306,7 +1306,7 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v3.4.5",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
@@ -1362,7 +1362,7 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v3.4.5",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
@@ -1411,16 +1411,16 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v3.4.5",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "6a615613745cef820d807443f32076bb9f5d0a38"
+                "reference": "a479817ce0a9e4adfd7d39c6407c95d97c254625"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/finder/6a615613745cef820d807443f32076bb9f5d0a38.zip",
-                "reference": "6a615613745cef820d807443f32076bb9f5d0a38",
+                "url": "https://files.phpcomposer.com/files/symfony/finder/a479817ce0a9e4adfd7d39c6407c95d97c254625.zip",
+                "reference": "a479817ce0a9e4adfd7d39c6407c95d97c254625",
                 "shasum": ""
             },
             "require": {
@@ -1456,11 +1456,11 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2018-02-11T17:15:12+00:00"
+            "time": "2018-03-05T18:28:11+00:00"
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v3.4.5",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
@@ -1688,7 +1688,7 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v3.4.5",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
@@ -1756,7 +1756,7 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v3.4.5",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
@@ -1825,7 +1825,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.4.5",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",

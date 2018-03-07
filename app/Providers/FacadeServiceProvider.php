@@ -13,7 +13,6 @@ use Universe\Facades\CacheFacade;
 use Universe\Facades\DatabaseFacade;
 use Universe\Facades\EventFacade;
 use Universe\Facades\LoggerFacade;
-use Universe\Facades\SessionFacade;
 
 class FacadeServiceProvider extends \Universe\Providers\FacadeServiceProvider
 {
@@ -31,6 +30,5 @@ class FacadeServiceProvider extends \Universe\Providers\FacadeServiceProvider
         'Event'=>EventFacade::class,
         'Cache'=>CacheFacade::class,
         'Config'=>CacheFacade::class,
-        'Session'=>SessionFacade::class,
     ];
 }

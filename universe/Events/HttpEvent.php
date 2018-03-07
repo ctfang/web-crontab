@@ -41,11 +41,10 @@ class HttpEvent
                 $contents .= ob_get_clean();
             }
             $response->end($contents.$disResponse??'');
-        }elseif($disResponse){
+        }elseif($disResponse!==null){
             $response->end($disResponse);
-        }else{
-            return $request->request;
         }
+        $this->endRequest();
     }
 
     /**
@@ -147,5 +146,15 @@ class HttpEvent
     public function onFinish(Server $server,int $taskId,$data)
     {
         //return $data;
+    }
+
+    /**
+     * 请求结束执行
+     *
+     * @author 明月有色 <2206582181@qq.com>
+     */
+    public function endRequest()
+    {
+
     }
 }

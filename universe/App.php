@@ -10,11 +10,7 @@ namespace Universe;
 
 
 use Dotenv\Dotenv;
-use Swoole\Http\Request;
-use Swoole\Http\Response;
-use Universe\Servers\ResponseServer;
 use Universe\Support\Di;
-use Universe\Servers\RequestServer;
 
 class App
 {

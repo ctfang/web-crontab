@@ -82,7 +82,7 @@
 <header class="am-topbar am-topbar-fixed-top">
     <div class="am-container">
         <h1 class="am-topbar-brand">
-            <a href="#">Amaze UI</a>
+            <a href="#">WEB-CRONTAB</a>
         </h1>
 
         <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only"
@@ -92,19 +92,7 @@
         <div class="am-collapse am-topbar-collapse" id="collapse-head">
             <ul class="am-nav am-nav-pills am-topbar-nav">
                 <li class="am-active"><a href="#">首页</a></li>
-                <li><a href="#">项目</a></li>
-                <li class="am-dropdown" data-am-dropdown>
-                    <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
-                        下拉菜单 <span class="am-icon-caret-down"></span>
-                    </a>
-                    <ul class="am-dropdown-content">
-                        <li class="am-dropdown-header">标题</li>
-                        <li><a href="#">1. 默认样式</a></li>
-                        <li><a href="#">2. 基础设置</a></li>
-                        <li><a href="#">3. 文字排版</a></li>
-                        <li><a href="#">4. 网格系统</a></li>
-                    </ul>
-                </li>
+                <li><a href="/project/index">项目</a></li>
             </ul>
 
             <div class="am-topbar-right">
@@ -128,7 +116,7 @@
             <h1 class="get-title">web-crontab 多目标主机的定时任务管理</h1>
 
             <p>
-                期待你的参与，共同打造一个简单易用的前端框架
+                期待你的参与，共同打造一个简单易用的定时任务管理系统
             </p>
 
             <p>
@@ -141,48 +129,48 @@
 <div class="detail">
     <div class="am-g am-container">
         <div class="am-u-lg-12">
-            <h2 class="detail-h2">One Web 、Any Device，期待和你一起去实现!</h2>
+            <h2 class="detail-h2">基于web的 、多主机的，安全的任务管理!</h2>
 
             <div class="am-g">
                 <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
 
                     <h3 class="detail-h3">
                         <i class="am-icon-mobile am-icon-sm"></i>
-                        为移动而生
+                        为WEB而生
                     </h3>
 
                     <p class="detail-p">
-                        Amaze UI 采用业内先进的 mobile first 理念，从小屏逐步扩展到大屏，最终实现所有屏幕适配，适应移动互联潮流。
+                        部署简单，使用简单。随时随地在浏览器上即可管理过个主机任务。可以使用版本为单位发布，方便查看历史记录，支持回滚；也可以便捷编辑，直接操作远程主机
                     </p>
                 </div>
                 <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
                     <h3 class="detail-h3">
                         <i class="am-icon-cogs am-icon-sm"></i>
-                        组件丰富，模块化
+                        多主机
                     </h3>
 
                     <p class="detail-p">
-                        Amaze UI 含近 20 个 CSS 组件、10 个 JS 组件，更有 17 款包含近 60 个主题的 Widgets，可快速构建界面出色、体验优秀的跨屏页面，大幅度提升你的开发效率。
+                        基于项目版本为单位的，可以关联多个主机，一键发布当多个目标主机，省去人工检查，可以一键回滚到历史版本，一切都有跟可寻
                     </p>
                 </div>
                 <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
                     <h3 class="detail-h3">
                         <i class="am-icon-check-square-o am-icon-sm"></i>
-                        本地化支持
+                        开源
                     </h3>
 
                     <p class="detail-p">
-                        相比国外的前端框架，Amaze UI 专注解决中文排版优化问题，根据操作系统调整字体，实现最佳中文排版效果；针对国内主流浏览器及 App 内置浏览器提供更好的兼容性支持，为你节省大量兼容性调试时间。
+                        不满足已有功能，允许修改任何源码实现，基于MIT协议开源，可以复制、修改、发表、再授权。
                     </p>
                 </div>
                 <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
                     <h3 class="detail-h3">
                         <i class="am-icon-send-o am-icon-sm"></i>
-                        轻量级，高性能
+                        安全
                     </h3>
 
                     <p class="detail-p">
-                        Amaze UI 非常注重性能，基于轻量的 Zepto.js 开发，并使用 CSS3 来做动画交互，平滑、高效，更适合移动设备，让你的 Web 应用可以高速载入。
+                        是用ssh扩展链接远程目标主机，在目标机配置好公钥，可以不保存账号密码；如果只是开发者使用，也可以在本地开发机部署，使用账号密码登录；方便安全
                     </p>
                 </div>
             </div>
@@ -197,18 +185,18 @@
             <hr class="am-article-divider am-show-sm-only hope-hr">
         </div>
         <div class="am-u-lg-8 am-u-md-6 am-u-sm-12">
-            <h2 class="hope-title">同我们一起打造你的前端框架</h2>
+            <h2 class="hope-title">同我们一起打造一个简单易用的定时任务管理系统</h2>
 
             <p>
-                在知识爆炸的年代，我们不愿成为知识的过客，拥抱开源文化，发挥社区的力量，参与到Amaze Ui开源项目能获得自我提升。
+                在知识爆炸的年代，我们不愿成为知识的过客，拥抱开源文化，发挥社区的力量，参与到web-crontab开源项目能获得自我提升。
             </p>
         </div>
     </div>
 </div>
 
 <footer class="footer">
-    <p>© 2018 <a href="http://www.yunshipei.com" target="_blank">AllMobilize, Inc.</a> Licensed under <a
-                href="http://opensource.org/licenses/MIT" target="_blank">MIT license</a>. by the AmazeUI Team.</p>
+    <p>© 2018 <a href="https://github.com/ctfang/web-crontab" target="_blank">The source address</a> Licensed under <a
+                href="http://opensource.org/licenses/MIT" target="_blank">MIT license</a>. by the WEB-CRONTAB Team.</p>
 </footer>
 
 <!--[if lt IE 9]>
